@@ -1,0 +1,11 @@
+.wrapper{
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+.login{
+  padding: 30px 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-top: 30px;
+}
