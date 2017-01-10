@@ -1,5 +1,6 @@
 function checkLoginState() {
   login();
+  logout()
   getInfo();
   album();
 }
@@ -14,7 +15,20 @@ function login() {
       } else {
         document.getElementById('profile').innerHTML = 'You are not logged into Facebook.';
       }
-  },{scope: 'email,user_likes'});
+  },{scope: 'email', return_scopes: true});
+}
+function logout() {
+  FB.getLoginStatus(function(response) {
+  if (response && response.status === 'connected') {
+    FB.logout(function(response) {
+      document.location.reload();
+    });
+  } else if (response.status === 'not_authorized') {
+     FB.logout(function(response) {
+      document.location.reload();
+    });
+  }
+});
 }
 function getInfo() {
   FB.api(
