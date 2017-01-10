@@ -14,7 +14,7 @@ function login() {
       } else {
         document.getElementById('profile').innerHTML = 'You are not logged into Facebook.';
       }
-  });
+  },{scope: 'email,user_likes'});
 }
 function getInfo() {
   FB.api(
