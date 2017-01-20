@@ -1,48 +1,122 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Facebook api</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-	<script>
-		  window.fbAsyncInit = function() {
-  		  FB.init({
-  		    appId      : '941854605876088',
-  		    cookie     : true,  // enable cookies to allow the server to access
-  		                        // the session
-  		    xfbml      : true,  // parse social plugins on this page
-  		    version    : 'v2.8' // use graph api version 2.8
-  		  });
-		  };
-		  // Load the SDK asynchronously
-		  (function(d, s, id) {
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) return;
-		    js = d.createElement(s); js.id = id;
-		    js.src = "https://connect.facebook.net/en_US/sdk.js";
-		    fjs.parentNode.insertBefore(js, fjs);
-		  }(document, 'script', 'facebook-jssdk'));
-	</script>
-</head>
-<body>
-  <div class="container">
-  	<div class="wrapper">
-      <div class="login">
-        <div class="facebook-login">
-          <button class="btn btn-primary" onclick="getInfo()">Get Info</button>
-          <button class="btn btn-primary" onclick="login()" id="login">Login</button>
-          <button class="btn btn-primary" onclick="album()">Show photo</button>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Homepage</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="favicon-16x16.png" type="image/x-icon" sizes="16x16">
+    <!-- build:css css/style.css-->
+    <link rel="stylesheet" href="style/libs.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/print.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.standalone.css">
+    <!-- endbuild-->
+    <script src="js/modernizr.js"></script>
+  </head>
+  <body class="home">
+    <div class="container">
+      <section class="select-deals">
+        <h4 class="title">Select Deals by Categories<a class="view-all" href="#" title="All Deals">All Deals</a>
+        </h4>
+        <div class="cate-deals">
+              <ul class="sort-list-cate">
+                <li><a href="#" title="Outdoors &amp;amp; Sports">Outdoors &amp; Sports</a>
+                </li>
+                <li><a href="#" title="Automobiles &amp;amp; Motorcycle">Automobiles &amp; Motorcycle</a>
+                </li>
+                <li><a href="#" title="Computers &amp;amp; Networking">Computers &amp; Networking</a>
+                </li>
+                <li><a href="#" title="Consumer Electronics">Consumer Electronics</a>
+                </li>
+                <li><a href="#" title="Home &amp;amp; Garden">Home &amp; Garden</a>
+                </li>
+                <li><a href="#" title="Watches &amp;amp; Jewelry">Watches &amp; Jewelry</a>
+                </li>
+                <li><a href="#" title="Mobile Phones">Mobile Phones</a>
+                </li>
+                <li><a href="#" title="Health &amp;amp; Beauty">Health &amp; Beauty</a>
+                </li>
+                <li><a href="#" title="Apple Accessories">Apple Accessories</a>
+                </li>
+                <li><a href="#" title="Office &amp;amp; School Supplies">Office &amp; School Supplies</a>
+                </li>
+                <li><a href="#" title="Electrical &amp;amp; Tools">Electrical &amp; Tools</a>
+                </li>
+                <li><a href="#" title="Tablet PC &amp;amp; Accessories">Tablet PC &amp; Accessories</a>
+                </li>
+                <li><a href="#" title="LED Lights &amp;amp; Flashlights">LED Lights &amp; Flashlights</a>
+                </li>
+                <li><a href="#" title="Apparel">Apparel</a>
+                </li>
+              </ul>
         </div>
-      </div>
-      <div id="login"></div>
-      <div id ="profile"></div>
-      <div id ="photo"></div>
+      </section>
+      <section class="newsletter-deals">
+        <div class="newsletter-email"><span class="text">Newsletter-Exclusive Deals</span>
+          <input class="newsletter-subscribe-text" id="newsletter-email" name="NewsletterEmail" placeholder="Enter your email here..." type="text" value="">
+          <input class="button-1 newsletter-subscribe-button" type="button" value="Subscribe" id="newsletter-subscribe-button">
+        </div>
+        <div class="share-deals"><span class="text">share the deals:<a class="facebook" href="#" title="Facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a><a class="twitter" href="#" title="Twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a><a class="google" href="#" title="Twitter"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></span></div>
+        <div class="promotional-deals">
+          <p class="text">Promotional Events</p><a class="btn btn-submit" href="#" title="Enter">Enter</a>
+        </div>
+      </section>
     </div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
-  <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
-</body>
+    <section class="container">
+      <ul class="product-deals">
+        <li class="item">
+          <div class="product-head">
+            <div class="sale-off"><span class="number">34</span><span class="text">Off</span></div>
+          </div>
+          <div class="product-wrapper"><a href="#" title="Product 1"><img class="img-responsive" src="images/product-1.jpg" alt="Product 1"><span class="title">Water-resistant Nylon 15L Ultra-light Leisure Backpack</span>
+                  <div class="product-prices"><span class="price-new">800000 vnđ</span><span class="price-old">960000 vnđ</span></div>
+                  <div class="day-deals" data-deals>20/01/2017 23:00:00</div></a>
+          </div>
+        </li>
+        <li class="item">
+          <div class="product-head">
+            <div class="sale-off"><span class="number">34</span><span class="text">Off</span></div>
+          </div>
+          <div class="product-wrapper"><a href="#" title="Product 1"><img class="img-responsive" src="images/product-1.jpg" alt="Product 1"><span class="title">Water-resistant Nylon 15L Ultra-light Leisure Backpack</span>
+                  <div class="product-prices"><span class="price-new">800000 vnđ</span><span class="price-old">960000 vnđ</span></div>
+                  <div class="day-deals" data-deals>21/01/2017 11:58:00</div></a>
+          </div>
+        </li>
+        <li class="item">
+          <div class="product-head">
+            <div class="sale-off"><span class="number">34</span><span class="text">Off</span></div>
+          </div>
+          <div class="product-wrapper"><a href="#" title="Product 1"><img class="img-responsive" src="images/product-1.jpg" alt="Product 1"><span class="title">Water-resistant Nylon 15L Ultra-light Leisure Backpack</span>
+                  <div class="product-prices"><span class="price-new">800000 vnđ</span><span class="price-old">960000 vnđ</span></div>
+                  <div class="day-deals" data-deals>22/01/2017 11:58:00</div></a>
+          </div>
+        </li>
+        <li class="item">
+          <div class="product-head">
+            <div class="sale-off"><span class="number">34</span><span class="text">Off</span></div>
+          </div>
+          <div class="product-wrapper"><a href="#" title="Product 1"><img class="img-responsive" src="images/product-1.jpg" alt="Product 1"><span class="title">Water-resistant Nylon 15L Ultra-light Leisure Backpack</span>
+                  <div class="product-prices"><span class="price-new">800000 vnđ</span><span class="price-old">960000 vnđ</span></div>
+                  <div class="day-deals" data-deals>24/01/2017 11:58:00</div></a>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <footer></footer>
+    <!-- build:js js/script.js-->
+    <script src="js/l10n.js"></script>
+    <script src="js/libs.js"></script>
+    <script src="js/script.js"></script>
+    <!-- endbuild-->
+    <!-- build:development-only-->
+    <script src="//localhost:35729/livereload.js"></script>
+    <!-- endbuild-->
+    <!--[if lte IE 9]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
+    <noscript>JavaScript is off. Please enable to view full site.</noscript>
+  </body>
 </html>

@@ -1,0 +1,287 @@
+@font-face {
+  font-family: 'fontawesome';
+  src: url('../fonts/fontawesome-webfont.woff2') format('woff2'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/fontawesome-webfont.ttf') format('truetype');
+}
+main {
+  margin: 15px 0;
+  min-height: 300px;
+}
+.content-tab {
+  display: none;
+}
+.content-tab.active {
+  height: 600px;
+  display: block;
+}
+.content-warpper {
+  position: relative;
+}
+.content-warpper .floating-panel {
+  position: absolute;
+  bottom: 15%;
+  right: 0;
+  left: 0;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+  display: block;
+}
+.content-warpper .input-key {
+  width: 100%;
+  height: 40px;
+  display: block;
+  padding-left: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 2px 1px 1px #333;
+}
+.content-warpper .input-key:focus,
+.content-warpper .input-key:active {
+  border: none;
+  outline-offset: none;
+}
+.content-warpper .submit {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  position: absolute;
+  right: 20px;
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
+  font-size: 0;
+  background-image: url(../images/ico-search.png);
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0;
+}
+.select-deals {
+  padding: 10px;
+  background-color: #fff;
+  width: 70%;
+  float: left;
+}
+.select-deals:before,
+.select-deals:after {
+  content: " ";
+  display: table;
+}
+.select-deals:after {
+  clear: both;
+}
+.select-deals .title {
+  width: 20%;
+  display: block;
+  float: left;
+}
+.select-deals .view-all {
+  color: #fc6b16;
+  display: block;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.select-deals .cate-deals {
+  width: 80%;
+  float: left;
+  display: block;
+}
+.select-deals ul {
+  margin-bottom: 0;
+  padding-left: 0;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+}
+.select-deals ul:before,
+.select-deals ul:after {
+  content: " ";
+  display: table;
+}
+.select-deals ul:after {
+  clear: both;
+}
+.select-deals ul li {
+  list-style: none;
+  width: 33.33%;
+  float: left;
+}
+.select-deals ul li a {
+  text-align: center;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: #333;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  text-transform: uppercase;
+}
+.select-deals ul li a:hover,
+.select-deals ul li a:focus {
+  text-decoration: none;
+}
+.newsletter-deals {
+  width: 30%;
+  float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.newsletter-deals .newsletter-email {
+  position: relative;
+  width: 100%;
+}
+.newsletter-deals .newsletter-email .text {
+  font-size: 14px;
+  font-weight: bold;
+}
+.newsletter-deals .newsletter-email .newsletter-subscribe-text {
+  padding: 5px;
+  width: 100%;
+  height: 40px;
+  line-height: 20px;
+  border-radius: 0;
+  border: 1px solid #ddd;
+}
+.newsletter-deals .newsletter-email .newsletter-subscribe-button {
+  min-width: 100px;
+  height: 40px;
+  line-height: 40px;
+  box-shadow: none;
+  border: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.share-deals {
+  padding: 5px 0;
+  display: block;
+}
+.promotional-deals {
+  display: block;
+  background: url(../images/deals_bg.jpg);
+  background-size: cover;
+  padding: 10px;
+  text-align: center;
+}
+.promotional-deals .text {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #eee;
+  padding: 10px 0 5px;
+}
+.promotional-deals .btn-submit {
+  min-width: 100px;
+  background-color: #eee;
+  color: #000;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.product-deals .item {
+  display: block;
+  float: left;
+  width: 280px;
+  padding: 16px;
+  min-height: 380px;
+  overflow: hidden;
+  margin: 0 15px 15px;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 10px 5px -6px #ddd;
+}
+.product-deals .product-head {
+  position: relative;
+}
+.product-deals .product-head .sale-off {
+  width: 50px;
+  height: 50px;
+  display: block;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  line-height: 16px;
+  top: 0;
+  background-color: #d72d30;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #fff;
+}
+.product-deals .product-head .number {
+  padding-top: 10px;
+  color: #fff;
+  display: block;
+}
+.product-deals .product-head .number:after {
+  content: '%';
+  display: inline-block;
+  margin-left: 2px;
+}
+.product-deals .product-head .text {
+  display: block;
+  text-transform: uppercase;
+}
+.product-deals .title {
+  height: 40px;
+  overflow: hidden;
+  color: #000;
+  display: block;
+}
+.product-deals .product-prices {
+  position: relative;
+  overflow: hidden;
+  height: 35px;
+}
+.product-deals .product-prices .price-new {
+  font-size: 18px;
+  float: left;
+  text-align: center;
+  line-height: 35px;
+  width: 50%;
+  color: #de3032;
+}
+.product-deals .product-prices .price-old {
+  float: right;
+  width: 50%;
+  font-weight: normal;
+  text-align: left;
+  line-height: 35px;
+  font-size: 14px;
+  color: #777;
+}
+.day-deals:before,
+.day-deals:after {
+  content: " ";
+  display: table;
+}
+.day-deals:after {
+  clear: both;
+}
+.day-deals .col-number {
+  background-color: #000;
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+.day-deals .col-number .number-1 {
+  visibility: hidden;
+}
+.day-deals .col-number .number-2 {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+}
+.day-deals .separator {
+  width: 15px;
+  height: 15px;
+  display: block;
+  float: left;
+}
