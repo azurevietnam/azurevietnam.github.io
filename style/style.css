@@ -181,6 +181,18 @@ main {
   font-size: 12px;
   text-transform: uppercase;
 }
+.product-deals {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.product-deals:before,
+.product-deals:after {
+  content: " ";
+  display: table;
+}
+.product-deals:after {
+  clear: both;
+}
 .product-deals .item {
   display: block;
   float: left;
