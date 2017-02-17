@@ -1,303 +1,62 @@
+;(function($, window, undefined) {
+  'use strict';
+  var body = $('body');
+  $('.nav-icon').click(function(){
+    var nav = $('.header-wrap');
+    nav.parents("body").toggleClass('overflow');
+    $('.nav-icon').toggleClass('open');
+    $('.menu-wrapper').toggleClass('active');
+  });
+  $('[data-scroll-up]').click(function () {
+    $("html, body").animate({
+        scrollTop: 0
+    }, 600);
+    return false;
+  });
+  $('[data-toggle="modal"]').click(function() {
+    var target = $(this).data('target');
+    if($(target).not(':visible')) {
+      $(target).css('display', 'block');
+    }
+  });
+}(jQuery, window));
 
-
-// ;(function($, window, undefined) {
-//   'use strict';
-
-//   var pluginName = 'countdown';
-
-//   var calcTime = function(endtime) {
-//     var t = Date.parse(endtime) - Date.parse(new Date());
-//     var sec = Math.floor((t / 1000) % 60);
-//     var min = Math.floor((t / 1000 / 60) % 60);
-//     var hour = Math.floor((t / (1000 * 60 * 60)) % 24);
-//     var day = Math.floor(t / (1000 * 60 * 60 * 24));
-//     return {
-//       'total': t,
-//       'day': day,
-//       'hour': hour,
-//       'min': min,
-//       'sec': sec
-//     };
-//   };
-
-//   function Plugin(element, options) {
-//     this.element = $(element);
-//     this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
-//     this.init();
-//   }
-
-//   Plugin.prototype = {
-//     init: function() {
-//       var that = this,
-//           ele = that.element,
-//           opt = that.options;
-
-//       var dayHolder = ele.find('[data-day]');
-//       var hourHolder = ele.find('[data-hour]');
-//       var minHolder = ele.find('[data-min]');
-//       var secHolder = ele.find('[data-sec]');
-//       var time = opt.deadline;
-//       var countdownloop;
-//       function updateTimer() {
-//         var t = calcTime(time);
-
-//         dayHolder.html(t.day);
-//         hourHolder.html(('0' + t.hour).slice(-2));
-//         minHolder.html(('0' + t.min).slice(-2));
-//         secHolder.html(('0' + t.sec).slice(-2));
-
-//         if (t.total <= 0) {
-//           clearInterval(countdownloop);
-//         }
-//       }
-//       updateTimer();
-//       countdownloop = setInterval(updateTimer, 1000);
-//     },
-
-//     destroy: function() {
-//       $.removeData(this.element[0], pluginName);
-//     }
-//   };
-
-//   $.fn[pluginName] = function(options, params) {
-//     return this.each(function() {
-//       var instance = $.data(this, pluginName);
-//       if (!instance) {
-//         $.data(this, pluginName, new Plugin(this, options));
-//       } else if (instance[options]) {
-//         instance[options](params);
-//       }
-//     });
-//   };
-
-//   $(function() {
-//     $('[data-' + pluginName + ']')[pluginName]({
-//     });
-//   });
-
-// }(jQuery, window));
 
 ;(function($, window, undefined) {
   'use strict';
-
-  var pluginName = 'deals';
-
+  var pluginName = 'show';
   function Plugin(element, options) {
     this.element = $(element);
     this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
-    this.runMenu();
+    this.init();
   }
 
-
   Plugin.prototype = {
-    //used to contain all the end dates of the correlating valid elements with the same index.
-    endDate : [],
-    validElements : [],
-
-    //used to contain the last and next time.
-    display : [],
-
-    initialHeight : undefined,
-    initialInnerDivMarginTop : undefined,
-    originalBorderTopStyle : undefined,
-
-    runMenu: function () {
-      var self = this;
-
-      self.init();
-
-      //function to be called every whole second.
-      setInterval(function(){
-
-        //go through all the valid elements
-        for (var i=0;i<self.validElements.length;i++) {
-
-          //change this elements time
-          self.changeTime(self.validElements[i], self.endDate[i]);
-
-        }
-
-      }, 1000);
-    },
-
-    init : function() {
-      var self = this;
-
-      //regular expression match for ' 00/00/0000 00:00:00 '
-      var regex_match = self.element.text().match(/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/);
-
-      //if the the date format inside the element is invalid
-      if(!regex_match){
-
-        //create a message for people in staging
-        self.element
-          .text('Please ensure your count down date is in the correct format of 00/00/0000 00:00:00')
-          .css({
-
-            'color' : 'red',
-            'font-size' : 24,
-            'font-weight' : 'bold',
-            'text-transform' : 'uppercase',
-            'text-decoration' : 'underline',
-            'line-height' : '30px'
-
-          });
-
-      } else {
-
-        //push the current element into the validElements array
-        self.validElements.push(self.element);
-
-        //use the date to create a Date object
-        var end = new Date(regex_match[3], regex_match[2] - 1, regex_match[1], regex_match[4], regex_match[5], regex_match[6]);
-
-        if (end > new Date()) {
-
-          //push self new date object of "end" into the endDate array
-          self.endDate.push(end);
-
-          //change the element to show the time rather than the date thats currently in it.
-          self.changeTime(self.element, end);
-
-          self.element.html('');
-
-          var length = self.display.next.length;
-
-          for (var i = 0; i < length; i++) {
-            var html = [
-              '<div class="col-number">',
-                '<div class="number-1">',
-                  '<span>' + self.display.next[i] + '</span>',
-                '</div>',
-                '<div class="number-2">' + self.display.last[i] + '</div>',
-              '</div>'
-            ];
-
-            i < length - 1 &&
-              html.push('<div class="separator"></div>');
-
-            self.element.append(html.join(''));
+    init: function() {
+      var selt = this.element,
+          title = selt.find('.item-title').text(),
+          desc = selt.find('.item-description').html(),
+          img = selt.find('.item-photo').html(),
+          price = selt.find('.item-price').text();
+      selt.find('[data-popup]').click(function(){
+        $(this).magnificPopup({
+          items: {
+            src: '<div class="popup-content">'+
+                      '<div class="wrapper-skin">'+
+                        '<div class="item-images">'+ img +'</div>'+
+                          '<div class="wrapper-content">'+
+                            '<h4 class="item-title"> '+ title +' </h4>'+
+                            '<div class="item-price">'+ price +'</div>'+
+                            '<div class="item-desc">'+ desc +'</div>'+
+                          '</div>'+
+                      '</div>'+
+                    '</div>',
           }
-          var divA = self.element.find('div.col-number div.number-1');
-          divA.css('display', 'none');
-          // var divA = self.element.find('div.col-number div.number-1');
-          //     // divB = self.element.find('div.col-number div.number-2');
-
-          // //place element2 under element 1 with minus margin
-          // // divB.css('margin-top', -divB.height());
-
-          // //grab initial properties for reversions
-          // self.initialHeight = divA.height();
-          // self.initialInnerDivMarginTop = parseInt(divA.find('div').css('margin-top'));
-          // self.originalBorderTopStyle = divA.css('border-top');
-
-        } else {
-
-          self.element.html([
-            '<div class="countdown"><div class="col-number"><div class="number-1"><span>00</span></div></div><div class="separator"></div><div class="col-number"><div class="number-1"><span>00</span></div></div><div class="separator"></div><div class="col-number" style=""><div class="number-1"><span>00</span></div></div><div class="separator"></div><div class="col-number"><div class="number-1"><span>00</span></div></div></div>'
-          ]);
-        }
-      }
-
+        });
+      });
     },
-
-    doFlip : function(element, lastNumber) {
-      var element1 = $(element).find('div.number-1 span');
-
-      //change elements to have the last and next number in.
-      element1.text(lastNumber)
-              .removeClass('not-lightened')
-              .addClass('lighten');
-
-      setTimeout(function(){
-
-        element1.removeClass('lighten')
-                .addClass('not-lightened');
-
-      },500);
-
-    },
-
-    changeTime : function(element, endTime) {
-      element = $(element);
-
-      var self = this,
-          today = new Date();
-
-
-      if (today.getTime() > endTime.getTime()) { return element.text('Happy new year'); }
-
-
-      // today = new Date();
-
-      //object for the display
-      self.display = {
-        'last' : [],
-        'next' : []
-      };
-
-      //find the difference in seconds from the end time and the time now
-      var seconds = Math.floor((endTime.getTime() - today.getTime()) / 1000) + 1;
-
-      //work out the time with the difference and push into its passed in array
-      self.display.last = self.calcTime(seconds);
-
-      //reset the variable to the difference in seconds from the end time and the time now
-      seconds = Math.floor((endTime.getTime() - today.getTime()) / 1000);
-
-      //work out the time with the difference and push into its passed in array
-      self.display.next = self.calcTime(seconds);
-
-      //go through and recreate the col-numbers and layering divs
-      for (var i = 0; i < self.display.next.length; i++) {
-
-
-        //if it consists of only 1 character
-        if(self.display.next[i].toString().length === 1){
-
-          //prepend a "0" to this display (turns "1" into "01")
-          self.display.next[i] = '0' + self.display.next[i];
-
-        }
-
-        //if it consists of only 1 character
-        if(self.display.last[i].toString().length === 1) {
-
-          //prepend a "0" to this display (turns "1" into "01")
-          self.display.last[i] = '0' + self.display.last[i];
-
-        }
-
-        // $(element.find('div.col-number')).css('margin-top','5px');
-        $(element.find('div.col-number div.number-1 span')[i]).text(self.display.last[i]);
-        $(element.find('div.col-number div.number-2')[i]).text(self.display.next[i]);
-
-        // if the number is about to change.
-        self.display.next[i] !== self.display.last[i] &&
-          self.doFlip(element.find('div.col-number')[i], self.display.last[i]);
-
-      }
-
-    },
-
-    calcTime : function(seconds) {
-      var array = [];
-        //find amount of days in the amount of seconds
-      array[0] = Math.floor(seconds / 86400);
-        //minus that from the seconds variable
-      seconds -= array[0] * 86400; //seconds in a day
-        //find amount of hours in the amount of seconds left after days has been taken away
-      array[1] = Math.floor(seconds / 3600);
-        //minus that from the seconds variable
-      seconds -= array[1] * 3600; //seconds in an hour
-        //find amount of minutes in the amount of seconds left after days and hours has been taken away
-      array[2] = Math.floor(seconds / 60);
-        //minus that from the seconds variable
-      seconds -= array[2] * 60;
-        //put the seconds variable into the array
-      array[3] = seconds;
-
-      return [array[0],array[1],array[2],array[3]];
+    destroy: function() {
+      $.removeData(this.element[0], pluginName);
     }
   };
 
@@ -312,8 +71,568 @@
     });
   };
 
+  $.fn[pluginName].defaults = {
+    key: 'value',
+    onCallback: null
+  };
+
   $(function() {
-    $('[data-' + pluginName + ']')[pluginName]();
+    $('[data-' + pluginName + ']').on('customEvent', function() {
+      // to do
+    });
+
+    $('[data-' + pluginName + ']')[pluginName]({
+      key: 'custom'
+    });
+  });
+
+}(jQuery, window));
+
+
+;(function($, window, undefined) {
+  'use strict';
+
+  var pluginName = 'maps';
+
+  function Plugin(element, options) {
+    this.element = $(element);
+    this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
+    this.getScript();
+  }
+
+  Plugin.prototype = {
+    getScript: function () {
+      var self = this;
+      $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/js',
+        dataType: 'script',
+        data: {
+          key: 'AIzaSyANssOu9Unjh2ug2duVwwM4IUzgvaGsytI'
+        }
+      })
+        .done(function () {
+          self.init();
+        })
+        .fail(function (err) {
+          console.log(err);
+        });
+    },
+
+    init: function() {
+      this.initMap();
+      this.loadInfo();
+    },
+    initMap: function () {
+      this.map = new window.google.maps.Map(this.element[0], {
+        center: {lat: 10.773638, lng: 106.7054409},
+        zoom: 15,
+        zoomControl: true,
+        scaleControl: true,
+      });
+    },
+    bindInfoWindow: function (marker, map, infowindow, contentString) {
+      marker.addListener('click', function() {
+          infowindow.setContent(contentString);
+          infowindow.open(map, this);
+      });
+    },
+    loadInfo: function () {
+      var self = this;
+      $.ajax({
+        url: 'data/data.json',
+        type: 'GET',
+        dataType: 'json'
+      })
+        .done(function(res) {
+          self.mapInfo(res);
+        })
+        .fail(function() {
+          console.log('error');
+        });
+    },
+    mapInfo: function(results) {
+      this.infowindow = new window.google.maps.InfoWindow({
+        content: '',
+        maxWidth: 300
+      });
+      for (var i = 0; i < results.data.length; i++) {
+        var latitude = results.data[i].lat;
+        var longtitude = results.data[i].lng;
+        var name = results.data[i].name;
+        var address = results.data[i].address;
+        var city = results.data[i].city;
+        var phone = results.data[i].phone;
+        var web = results.data[i].web;
+        var hours = results.data[i].hours1;
+        var latLng = new window.google.maps.LatLng(latitude, longtitude);
+
+        var contentString = '<div class="content">'+
+            '<h4 class="store-marker"> '+ name + '</h1>'+
+              '<div class="description">'+
+                '<span class="address">'+'<b>Address:</b>&nbsp;'+ address + ', &nbsp;' + city +'</span>'+
+                '<span class="phone">'+'<b>Phone:</b>&nbsp;'+ phone +'</span>'+
+                '<span class="website">'+'<b>Website:</b>&nbsp;'+ web +'</span>'+
+                '<span class="time">'+'<b>Time:</b>&nbsp;'+ hours +'</span>'+
+              '</div>' +
+             '</div>';
+        var icons = {
+          url: '../images/upload/logo-ico.jpg',
+          scaledSize: new window.google.maps.Size(100, 17)
+        };
+        var marker = new window.google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          icon: icons
+        });
+        this.bindInfoWindow(marker, this.map, this.infowindow, contentString);
+      }
+    },
+    destroy: function() {
+      $.removeData(this.element[0], pluginName);
+    }
+  };
+
+  $.fn[pluginName] = function(options, params) {
+    return this.each(function() {
+      var instance = $.data(this, pluginName);
+      if (!instance) {
+        $.data(this, pluginName, new Plugin(this, options));
+      } else if (instance[options]) {
+        instance[options](params);
+      }
+    });
+  };
+
+  $.fn[pluginName].defaults = {};
+
+  $(function() {
+    $('[data-' + pluginName + ']')[pluginName]({
+      key: 'custom'
+    });
+  });
+
+}(jQuery, window));
+
+/**
+ *  @name quantity
+ *  @description init quantity input
+ *  @version 1.0
+ *  @options
+ *    max
+      min
+ *  @methods
+ *    init
+ *    destroy
+ */
+
+;(function($, window, undefined) {
+  'use strict';
+
+  var pluginName = 'quantity';
+
+  function Plugin(element, options) {
+    this.element = $(element);
+    this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      var that = this,
+          el = that.element,
+          opt = that.options;
+      // add attribute data-dec to decrease button
+      var btnDec = el.find('[data-dec]');
+      // add attribute data-dec to increase button
+      var btnInc = el.find('[data-inc]');
+      // add attribute data-dec to input
+      var output = el.find('[data-val]');
+      // set min value as default value of input
+      output.val(opt.min);
+
+      function checkLimit() {
+        if (parseInt(output.val(), 10) === opt.min) {
+          // check if value of input is equal to min value to disable decrease button
+          btnDec.attr('disabled', true);
+        } else if (parseInt(output.val(), 10) === opt.max) {
+          // check if value of input is equal to max value to disable increase button
+          btnInc.attr('disabled', true);
+        } else {
+          btnInc.add(btnDec).attr('disabled', false);
+        }
+      }
+
+      checkLimit();
+
+      btnDec.off('click.' + pluginName).on('click.' + pluginName, function() {
+        var val = output.val();
+        output.val(val - 1).change();
+      });
+
+      btnInc.off('click.' + pluginName).on('click.' + pluginName, function() {
+        var val = parseInt(output.val(), 10);
+        output.val(val + 1).change();
+      });
+
+      output.on('change.' + pluginName, function() {
+        checkLimit();
+      });
+    },
+
+    destroy: function() {
+      $.removeData(this.element[0], pluginName);
+    }
+  };
+
+  $.fn[pluginName] = function(options, params) {
+    return this.each(function() {
+      var instance = $.data(this, pluginName);
+      if (!instance) {
+        $.data(this, pluginName, new Plugin(this, options));
+      } else if (instance[options]) {
+        instance[options](params);
+      }
+    });
+  };
+
+  $.fn[pluginName].defaults = {
+    max: Number.POSITIVE_INFINITY,
+    min: 1
+  };
+
+  $(function() {
+    $('[data-' + pluginName + ']')[pluginName]({});
+  });
+
+}(jQuery, window));
+
+/**
+ *  @name owl
+ *  @description init owl carousel
+ *  @version 1.0
+ *  @options
+ *    owl carousel settings
+ *  @methods
+ *    init
+ *    tabSlide
+ *    initSlider
+ *    setDataOptions
+ *    destroy
+ */
+
+;(function($, window, undefined) {
+  'use strict';
+
+  var pluginName = 'owl';
+  var body = $('body');
+  var win = $(window);
+  var vars = {};
+  var initSlim = function() {
+    // var $thumb = $('.thumbnail-container'),
+    //     $parent = $('.thumbnail-container').parent(),
+    //     children = $thumb.find('img').clone(),
+    //     html = [];
+    // $thumb.remove();
+    // children.each(function (i, el) {
+    //   var li = $('<li class="thumbnail-image" />');
+    //   li.append(el);
+    //   html.push(li);
+    // });
+    // var ul = $('<ul class="thumbnail-container slidee" />');
+    // ul.append(html);
+    // $parent.append(ul);
+    // wrapper.sly({
+    //   horizontal: 1,
+    //   itemNav: 'basic',
+    //   // itemSelector: '.show',
+    //   // smart: 1,
+    //   // activateOn: 'click',
+    //   // mouseDragging: 1,
+    //   // touchDragging: 1,
+    //   // releaseSwing: 1,
+    //   // startAt: 0,
+    //   // scrollBy: 1,
+    //   // activatePageOn: 'click',
+    //   // speed: 300,
+    //   // elasticBounds: 1,
+    //   // easing: 'easeOutExpo',
+    //   // dragHandle: 1,
+    //   // dynamicHandle: 1,
+    //   // clickBar: 1
+    // });
+    // var sly = new Sly('.slide-wrapper', {
+    //   horizontal: true,
+    // });
+    var wrapper = $('<div class="slide-wrapper" />');
+    $('.thumbnail-container').wrap(wrapper);
+    $('.gallery-slider').append($('.nav-control'));
+    $('.slide-wrapper').sly({
+      horizontal: 1,
+      itemNav: 'basic',
+      smart: 1,
+      activateOn: 'click',
+      activatePageOn: 'click',
+      elasticBounds: 1,
+      mouseDragging: 1,
+      touchDragging: 1,
+      releaseSwing: 1,
+      startAt: 1,
+      scrollBy: 1,
+      easing: 'linear',
+      dragHandle: 1,
+      dynamicHandle: 1,
+      clickBar: 1,
+      prev: $('.gallery-slider').find('.btn-prev'),
+      next: $('.gallery-slider').find('.btn-next')
+      // horizontal: 1,
+      // itemNav: 'basic',
+      // smart: 1,
+      // activateOn: 'click',
+      // mouseDragging: 1,
+      // touchDragging: 1,
+      // releaseSwing: 1,
+      // startAt: 3,
+      // // scrollBar: $wrap.find('.scrollbar'),
+      // scrollBy: 1,
+      // // pagesBar: $wrap.find('.pages'),
+      // activatePageOn: 'click',
+      // speed: 300,
+      // elasticBounds: 1,
+      // easing: 'easeOutExpo',
+      // dragHandle: 1,
+      // dynamicHandle: 1,
+      // clickBar: 1,
+
+      // // Buttons
+      // prev: $('.gallery-slider').parent().find('.prev'),
+      // next: $('.gallery-slider').parent().find('.next')
+    });
+  };
+  var options = {
+    menuSlider: {
+      dots: false,
+    },
+    brandSlider: {
+      items: 7,
+      autoWidth:true,
+      dots: false,
+      margin: 30,
+      loop: true,
+      responsive : {
+        0 : {
+            items : 1,
+            nav:true,
+        },
+        // breakpoint from 480 up
+        480 : {
+            items : 1,
+            nav:true,
+        },
+        // breakpoint from 768 up
+        768 : {
+            items : 7,
+            nav:true,
+        }
+      }
+    },
+    gallerySlider: {
+      dots: false,
+      thumbContainerClass: 'thumbnail-container',
+      thumbImage: true,
+      thumbItemClass: 'thumbnail-image',
+      thumbs: true,
+      onInitialized: initSlim,
+    }
+  };
+
+
+  var tabSlide = function() {
+    var self = this.element;
+    var opt = this.options;
+    var ctrl = $('#' + vars.ctrl);
+    var dwn = $('#' + vars.dwn);
+    var child = $(self.children('.active'));
+
+    child.addClass('owl-carousel').owlCarousel(opt);
+
+    if(win.width() < 992) {
+      dwn.html(ctrl.children('.active').children().html());
+    }
+
+    ctrl.on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+      var current = $(e.target).attr('href');
+      var txt = $(e.target).text();
+      var prev = $(e.relatedTarget).attr('href');
+      self.find(current).addClass('owl-carousel').owlCarousel(opt);
+      dwn.html(txt);
+      self.find(prev).removeClass('owl-carousel').trigger('destroy.owl.carousel');
+    });
+
+    win.on('resize.' + pluginName, function() {
+      if(win.width() < 992) {
+        dwn.html(ctrl.children('.active').children().html());
+      }
+    });
+
+    body.off('click.' + pluginName).on('click.' + pluginName, function(e) {
+      if (e.target.id === vars.dwn) {
+        dwn.parent().addClass('active');
+      } else {
+        dwn.parent().removeClass('active');
+      }
+    });
+  };
+  var setDataOptions = function() {
+    this.options = $.extend({}, this.options, this.element.data(pluginName));
+    if (typeof this.options.typeSlide !== 'undefined') {
+      this.options = $.extend({}, this.options, options[this.options.typeSlide]);
+    }
+  };
+
+  function Plugin(element, options) {
+    this.element = $(element);
+    this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      setDataOptions.call(this);
+      this.initSlider();
+    },
+    initSlider: function() {
+      var self = this.element,
+          opt  = this.options;
+      if (!self.hasClass('tab-content') && !self.hasClass('owl-loaded')) {
+        self.addClass('owl-carousel').owlCarousel(opt);
+      } else {
+        vars.ctrl = opt.control;
+        vars.dwn = opt.dropdown;
+        tabSlide.call(this);
+      }
+    },
+    destroy: function() {
+      $.removeData(this.element[0], pluginName);
+    }
+  };
+
+  $.fn[pluginName] = function(options, params) {
+    return this.each(function() {
+      var instance = $.data(this, pluginName);
+      if (!instance) {
+        $.data(this, pluginName, new Plugin(this, options));
+      } else if (instance[options]) {
+        instance[options](params);
+      }
+    });
+  };
+
+  $.fn[pluginName].defaults = {
+    items: 1,
+    nav: true,
+    navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+    navClass: ['owl-prev owl-nav-btn','owl-next owl-nav-btn']
+  };
+
+  $(function() {
+    $('[data-' + pluginName + ']')[pluginName]({
+    });
+  });
+
+}(jQuery, window));
+
+/**
+ *  @name owl
+ *  @description init owl carousel
+ *  @version 1.0
+ *  @options
+ *    owl carousel settings
+ *  @methods
+ *    init
+ *    tabSlide
+ *    initSlider
+ *    setDataOptions
+ *    destroy
+ */
+
+;(function($, window, undefined) {
+  'use strict';
+
+  var pluginName = 'tooltip';
+  var vars = {};
+
+  var options = {
+    menu: {
+
+    }
+  };
+
+  var setDataOptions = function() {
+    this.options = $.extend({}, this.options, this.element.data(pluginName));
+    if (typeof this.options.typeSlide !== 'undefined') {
+      this.options = $.extend({}, this.options, options[this.options.typeSlide]);
+    }
+  };
+
+  function Plugin(element, options) {
+    this.element = $(element);
+    this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      var that = this;
+      var $el = this.element;
+      var opt = this.options;
+      that.var = vars;
+
+      setDataOptions.call(this);
+
+      var tooltipEle = document.createElement(opt.contentElement);
+      var content = document.createTextNode(opt.contentTooltip);
+
+      tooltipEle.setAttribute('class', opt.contentClass);
+      tooltipEle.appendChild(content);
+      vars.tooltip = tooltipEle;
+      document.body.appendChild(tooltipEle);
+
+      $el.on('mousemove.' + pluginName, function(e) {
+        $(that.var.tooltip).css({
+          top: e.pageY - 20,
+          left: e.pageX + 30,
+          opacity: 1
+        });
+      }).on('mouseleave.' + pluginName, function() {
+        $(that.var.tooltip).attr('style', '');
+      });
+
+    },
+    destroy: function() {
+      $.removeData(this.element[0], pluginName);
+    }
+  };
+
+  $.fn[pluginName] = function(options, params) {
+    return this.each(function() {
+      var instance = $.data(this, pluginName);
+      if (!instance) {
+        $.data(this, pluginName, new Plugin(this, options));
+      } else if (instance[options]) {
+        instance[options](params);
+      }
+    });
+  };
+
+  $.fn[pluginName].defaults = {
+    contentClass: 'tooltip-content',
+    contentElement: 'span',
+    contentTooltip: 'We don\'t serve it for delivery.'
+  };
+
+  $(function() {
+    $('[data-' + pluginName + ']')[pluginName]({
+    });
   });
 
 }(jQuery, window));

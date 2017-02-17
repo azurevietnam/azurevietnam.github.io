@@ -1,0 +1,25 @@
+{
+    "data": [{
+        "id": "1",
+        "name": "JASPAS Dong Khoi",
+        "lat": "10.773638",
+        "lng": "106.7054409",
+        "address": "33 Dong Khoi, Dist 1, HCMC",
+        "city": "Ho Chi Minh",
+        "state": "VN",
+        "phone": "+848-3827-0931",
+        "web": "http:\/\/jaspas.com.vn",
+        "hours1": "Mon-Sun 11am-10pm"
+    }, {
+        "id": "2",
+        "name": "JASPAS Hai Ba Trung",
+        "lat": "10.778543",
+        "lng": "106.703646",
+        "address": "74/7 Hai Ba Trung, Dist 1, HCMC",
+        "city": "Ho Chi Minh",
+        "state": "VN",
+        "phone": "+848-3822-9925\/6",
+        "web": "http:\/\/jaspas.com.vn",
+        "hours1": "Mon-Sun 11am-10pm"
+    }]
+}
