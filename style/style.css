@@ -11,11 +11,15 @@
   display: inline-block;
   height: 41px;
   border: none;
-  background-color: #d9534f;
+  background-color: #000;
   padding: 10px 20px;
   font-size: 15px;
   color: #fff;
   text-transform: uppercase;
+}
+.button-1:hover,
+.button-1:focus {
+  background-color: #c59d5f;
 }
 .button-2 {
   vertical-align: middle;
@@ -23,11 +27,15 @@
   min-width: 180px;
   height: 41px;
   border: none;
-  background-color: #f0ad4e;
+  background-color: #000;
   padding: 10px 20px;
   font-size: 15px;
   color: #fff;
   text-transform: uppercase;
+}
+.button-2:hover,
+.button-2:focus {
+  background-color: #c59d5f;
 }
 .input-text {
   vertical-align: middle;
@@ -276,7 +284,7 @@ html {
     background: url(../images/upload/bgd-menu.jpg) no-repeat;
     background-size: cover;
     margin-top: -80px;
-    padding-bottom: 80px;
+    margin-bottom: 80px;
     padding-top: 120px;
   }
   .wrapper.menus {
@@ -333,7 +341,6 @@ html {
 .popup-content .wrapper-skin {
   background-color: #fff;
   color: #444;
-  border: 2px solid #777;
   padding: 20px;
   text-shadow: none;
   -webkit-border-radius: 4px;
@@ -407,7 +414,7 @@ html {
 }
 .maps-store {
   width: 100%;
-  height: 300px;
+  height: 400px;
   display: block;
 }
 /*!
@@ -3391,7 +3398,7 @@ img.mfp-img {
 }
 .modal-content {
   left: 50%;
-  max-width: 600px;
+  max-width: 800px;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -3449,7 +3456,7 @@ header .nav-icon {
   width: 35px;
   height: 25px;
   margin-right: 10px;
-  margin-top: -40px;
+  margin-top: -36px;
   position: relative;
   z-index: 2;
   -webkit-transform: rotate(0deg);
@@ -3902,8 +3909,8 @@ footer .footer-wrapper {
   text-decoration: none;
 }
 .footer-top .newsletter-subscribe-block .icon-newsletter {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 26px;
   display: block;
 }
 .footer-top .newsletter-subscribe-block .newsletter-email {
@@ -3911,7 +3918,7 @@ footer .footer-wrapper {
 }
 .footer-top .newsletter-subscribe-block .newsletter-subscribe-text {
   width: 100%;
-  height: 30px;
+  height: 40px;
   padding-left: 10px;
 }
 .footer-top .newsletter-subscribe-block .newsletter-subscribe-button {
@@ -3953,7 +3960,7 @@ footer .footer-wrapper {
   border-bottom: 1px dashed #c59d5f;
 }
 .footer-bottom .copyright {
-  padding: 30px 0;
+  padding: 30px 0 0;
 }
 .footer-bottom .copyright small {
   color: #c59d5f;
@@ -4149,8 +4156,8 @@ footer .footer-wrapper {
   z-index: 100;
 }
 .menu-title li {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .menu-title li.active a {
   color: #c59d5f;
@@ -4179,11 +4186,11 @@ footer .footer-wrapper {
 }
 .item-menu .item-title {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
 }
 .item-menu .item-price {
-  font-size: 16px;
+  font-size: 14px;
 }
 .item-menu .item-photo img {
   margin: 0 auto;
@@ -4408,6 +4415,9 @@ footer .footer-wrapper {
   display: table-cell;
   font-size: 20px;
 }
+.wrap-slider {
+  padding: 0 60px;
+}
 .locations .tab-content {
   margin-top: 30px;
 }
@@ -4424,9 +4434,11 @@ footer .footer-wrapper {
 .contactBtn {
   background-color: transparent;
   border: 0;
-  font-size: 18px;
+  font-size: 16px;
   outline: none;
-  padding: 30px 15px 0;
+  color: #000;
+  padding: 3px 15px 0;
+  font-weight: 600;
   text-transform: uppercase;
 }
 .contactBtn:hover,
@@ -4436,6 +4448,9 @@ footer .footer-wrapper {
 @media (min-width: 768px) {
   .locations .nav-tabs {
     border-bottom: 0;
+  }
+  .locations .nav li > a {
+    padding: 3px 15px;
   }
   .locations .tabs-left li {
     display: block;
@@ -4455,7 +4470,8 @@ footer .footer-wrapper {
     border: none;
     color: #000;
     text-transform: uppercase;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
   }
   .locations .tabs-left li > a:hover,
   .locations .tabs-left li > a:focus {

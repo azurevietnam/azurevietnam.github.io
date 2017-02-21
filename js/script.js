@@ -358,9 +358,9 @@
   };
   var options = {
     menuSlider: {
+      autoplay: false,
     },
     brandSlider: {
-      autoplay: true,
       loop: true,
       margin: 30,
       responsive : {
@@ -385,31 +385,15 @@
       onInitialized: initSlim,
     },
     topSlider: {
-      lazyLoad: true
+      lazyLoad: true,
+      nav: false,
     },
     promotionSlider: {
-      nav: false,
-      autoplay: true,
-      autoplaySpeed: 200,
+      autoplayHoverPause: true,
       dots: true,
+      dotsClass: 'owl-dots promotionSlider',
       loop: true,
-      dotsClass: 'owl-dots promotionSlider'
-      // responsive : {
-      //   0 : {
-      //       items : 1,
-      //       nav:true,
-      //   },
-      //   // breakpoint from 480 up
-      //   480 : {
-      //       items : 4,
-      //       nav:true,
-      //   },
-      //   // breakpoint from 768 up
-      //   768 : {
-      //       items : 4,
-      //       nav:true,
-      //   }
-      // }
+      margin: 30,
     }
   };
 
@@ -510,7 +494,10 @@
     nav: true,
     navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
     navClass: ['owl-prev owl-nav-btn','owl-next owl-nav-btn'],
-    dots: false
+    dots: false,
+    autoplay: true,
+    autoplaySpeed: 500,
+    autoplayTimeout: 3000
   };
 
   $(function() {
