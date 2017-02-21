@@ -21,13 +21,19 @@
   <body>
     <header class="header-wrap"><a class="logo-mobile text-center" href="index.html" title="Jaspas"><img class="img-responsive" src="images/upload/logo.png" alt="Restaurant"></a>
       <div class="nav-icon pull-right" data-nav><span>&nbsp</span><span>&nbsp</span><span>&nbsp</span></div>
+      <ul class="languages mobile">
+        <li class="item"><a class="lang" href="#" title="Vietnames"><img class="img-responsive" src="images/upload/lang-vi.png" alt="Vietnames"></a>
+        </li>
+        <li class="item"><a class="lang" href="#" title="English"><img class="img-responsive" src="images/upload/lang-en.png" alt="English"></a>
+        </li>
+      </ul>
       <div class="menu-wrapper">
         <div class="top-bar">
           <div class="container">
             <ul class="header-links">
-              <li class="item-link"><a class="btn btn-default btn-sm" href="#" title="Login">Login</a>
+              <li class="item-link"><a class="btn btn-default btn-md" href="#" title="Login">Login</a>
               </li>
-              <li class="item-link"><a class="btn btn-default btn-sm" href="#" title="Register">Register</a>
+              <li class="item-link"><a class="btn btn-default btn-md" href="#" title="Register">Register</a>
               </li>
               <li class="item-link" id="topcartlink"><a class="ico-cart" href="#" title="Items"><span class="fa fa-shopping-cart"></span><span class="cart-qty">(0)</span><span class="cart-label">Items</span></a>
               </li>
@@ -55,7 +61,7 @@
                   </ul>
                 </div>
               </div>
-              <ul class="languages">
+              <ul class="languages desktop">
                 <li class="item"><a class="lang" href="#" title="Vietnames"><img class="img-responsive" src="images/upload/lang-vi.png" alt="Vietnames"></a>
                 </li>
                 <li class="item"><a class="lang" href="#" title="English"><img class="img-responsive" src="images/upload/lang-en.png" alt="English"></a>
@@ -515,11 +521,11 @@
             <div class="connected">
               <h3 class="title">Connect with us</h3>
               <ul>
-                <li class="items"><a href="#" title="Facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                <li class="items"><a href="#" title="Facebook"><img class="img-responsive icon-social" src="images/upload/fb.svg" alt="Facebook"></a>
                 </li>
-                <li class="items"><a href="#" title="Youtube"><span class="fa fa-youtube-play" aria-hidden="true"></span></a>
+                <li class="items"><a href="#" title="Youtube"><img class="img-responsive icon-social" src="images/upload/youtube.svg" alt="Youtube"></a>
                 </li>
-                <li class="items"><a href="#" title="Instagram"><span class="fa fa-instagram" aria-hidden="true"></span></a>
+                <li class="items"><a href="#" title="Instagram"><img class="img-responsive icon-social" src="images/upload/instagram.svg" alt="Instagram"></a>
                 </li>
               </ul>
             </div>
@@ -527,12 +533,17 @@
               <h3 class="title">Newsletter</h3>
               <div class="newsletter-email">
                 <input class="newsletter-subscribe-text" type="text" id="newsletter-email" name="NewsletterEmail" placeholder="Your email address">
-                <button class="button-1 newsletter-subscribe-button" type="button" value="Subscribe" id="newsletter-subscribe-button"><span class="fa fa-envelope" aria-hidden="true"></span></button>
+                <button class="button-1 newsletter-subscribe-button" type="button" value="Subscribe" id="newsletter-subscribe-button"><img class="img-responsive icon-newsletter" src="images/upload/mail.svg" alt="src">
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="scroll-up" data-scroll-up><a class="scroll" href="#" title="Scroll down"><span class="fa fa-angle-up" aria-hidden="true"></span></a>
+        <svg class="blurp-bottom" width="192" height="61" version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 160.7 61.5" enable-background="new 0 0 160.7 61.5" xml:space="preserve" style="transform: translate3d(0px, 0px, 0px);">
+          <path fill="#FFFFFF" d="M80.3,61.5c0,0,22.1-2.7,43.1-5.4s41-5.4,36.6-5.4c-21.7,0-34.1-12.7-44.9-25.4S95.3,0,80.3,0c-15,0-24.1,12.7-34.9,25.4S22.3,50.8,0.6,50.8c-4.3,0-6.5,0,3.5,1.3S36.2,56.1,80.3,61.5z"></path>
+        </svg>
+        <div class="top-arrow top-arrow-bubble" data-scroll-up>
+          <div class="arrow"></div>
         </div>
       </div>
       <div class="footer-bottom text-center">
@@ -551,10 +562,8 @@
                     <li><a href="#" title="The group">The group</a>
                     </li>
                   </ul>
-            </div><span class="line"></span>
+            </div>
             <div class="copyright">
-              <p><small>Tel:(+84).1234.5678 - Fax: (+84) 1234.5678</small></p>
-              <p><small>Add: 8/54 - 56 - 58 Dinh Tien Hoang, Dist 1, HCM City, Vietnam.</small></p>
               <p><small>  &copy; The Al Fresco's Group Vietnam 2017</small></p>
             </div>
           </div>
@@ -562,7 +571,7 @@
       </div>
     </footer>
     <div class="modal fade" id="hcm1">
-      <div class="map-container-wrapper">
+      <div class="map-container-wrapper modal-content">
         <div class="map-container">
           <div class="maps-store" data-maps></div><i class="fa fa-times clsBtn" data-dismiss="modal"></i>
         </div>
