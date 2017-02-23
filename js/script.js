@@ -19,6 +19,14 @@
       $(target).css('display', 'block');
     }
   });
+  $('.sub-menu').children('span').on('click', function(e) {
+    e.preventDefault();
+    $('.sub-menu > ul').toggleClass('open');
+  });
+  // $('.sub-menu').children('a').on('click', function(e) {
+  //   e.preventDefault();
+  //   $('.sub-menu > ul').toggleClass('open');
+  // });
   $('.down-arrow').click(function() {
     $('html, body').animate({
         scrollTop: $('.section-our-story').offset().top

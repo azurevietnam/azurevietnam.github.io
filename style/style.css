@@ -352,7 +352,7 @@ html {
 }
 .popup-content .wrapper-skin .item-images {
   display: inline-block;
-  width: 60%;
+  width: 100%;
   height: auto;
   vertical-align: middle;
   padding-right: 10px;
@@ -361,7 +361,7 @@ html {
   width: 100%;
 }
 .popup-content .wrapper-skin .wrapper-content {
-  max-width: 39%;
+  max-width: 100%;
   height: auto;
   display: inline-block;
   vertical-align: middle;
@@ -411,6 +411,14 @@ html {
 .popup-content .mfp-close:visited,
 .popup-content .mfp-close:focus {
   top: -18px;
+}
+@media (min-width: 992px) {
+  .popup-content .wrapper-skin .item-images {
+    width: 60%;
+  }
+  .popup-content .wrapper-skin .wrapper-content {
+    max-width: 39%;
+  }
 }
 .maps-store {
   width: 100%;
@@ -3557,7 +3565,7 @@ header .menu-wrapper.active {
   transition: 0.25s ease-in-out;
   height: 100vh;
   left: 0;
-  background-color: #515151;
+  background-color: #000;
   overflow: auto;
 }
 header .header-links {
@@ -3678,7 +3686,11 @@ header .main-menu ul li {
   display: block;
   list-style: none;
   position: relative;
-  text-align: center;
+  text-align: left;
+  padding: 0 15px;
+}
+header .main-menu ul li.active {
+  background-color: #c59d5f;
 }
 header .main-menu ul li a {
   text-transform: uppercase;
@@ -3691,9 +3703,25 @@ header .main-menu ul li a:focus {
   color: #c59d5f;
   text-decoration: none;
 }
-header .main-menu ul li > ul {
+header .main-menu ul li.sub-menu {
   position: relative;
+}
+header .main-menu ul li.sub-menu > ul {
+  display: none;
+}
+header .main-menu ul li.sub-menu > ul.open {
   display: block;
+}
+header .main-menu ul li.sub-menu span {
+  display: block;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  top: 5px;
+  background-size: contain;
+  background-image: url(../images/upload/add.svg);
 }
 @media (min-width: 992px) {
   header {
@@ -3811,6 +3839,9 @@ header .main-menu ul li > ul {
     line-height: 58px;
     font-size: 14px;
   }
+  header .main-menu ul li.sub-menu span {
+    display: none;
+  }
   header .main-menu ul li:hover > ul,
   header .main-menu ul li:focus > ul {
     visibility: visible;
@@ -3881,10 +3912,10 @@ footer .footer-wrapper {
 }
 .footer-top .connected ul li {
   display: inline-block;
-  margin-left: 15px;
-  margin-right: 15px;
-  width: 50px;
-  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #ffffff;
 }
@@ -3934,7 +3965,7 @@ footer .footer-wrapper {
 }
 .footer-bottom {
   background-color: #000;
-  padding: 30px 0 0;
+  padding: 30px 0;
 }
 .footer-bottom ul li {
   display: block;
@@ -3949,18 +3980,12 @@ footer .footer-wrapper {
   color: #c59d5f;
   text-decoration: none;
 }
-.footer-bottom .nav-footer {
-  padding: 30px 0;
-}
 .footer-bottom .line {
   display: block;
   margin: 0 auto;
   max-width: 200px;
   height: 2px;
   border-bottom: 1px dashed #c59d5f;
-}
-.footer-bottom .copyright {
-  padding: 30px 0 0;
 }
 .footer-bottom .copyright small {
   color: #c59d5f;
@@ -4083,9 +4108,6 @@ footer .footer-wrapper {
 .section-our-menu .item-wrapper {
   margin: 0 10rem;
 }
-.section-our-menu .item-wrapper:not(:last-child) {
-  border-bottom: 1px dashed #000;
-}
 .section-our-menu .item-menu {
   padding-bottom: 6rem;
   padding-top: 6rem;
@@ -4181,6 +4203,10 @@ footer .footer-wrapper {
 .menu-title.active > span:before {
   transform: rotateX(180deg);
 }
+.item-wrapper .item-menu {
+  padding-bottom: 30px;
+  border-bottom: 1px dashed #333;
+}
 .item-menu {
   cursor: pointer;
 }
@@ -4262,6 +4288,10 @@ footer .footer-wrapper {
   display: inline-block;
   vertical-align: middle;
 }
+.item-menu .btn-add-cart:hover,
+.item-menu .btn-add-cart:focus {
+  background-color: #c59d5f;
+}
 .menu-title {
   max-width: 300px;
   margin: 0 auto;
@@ -4333,6 +4363,13 @@ footer .footer-wrapper {
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+  }
+  .item-wrapper .item-menu {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .item-wrapper:not(:last-child) {
+    border-bottom: 1px dashed #000;
   }
   .item-menu .item-title {
     text-align: left;
@@ -4415,8 +4452,15 @@ footer .footer-wrapper {
   display: table-cell;
   font-size: 20px;
 }
-.wrap-slider {
-  padding: 0 60px;
+.wrap-slider .owl-nav .owl-nav-btn {
+  color: #333;
+  background-color: #c59d5f;
+}
+.wrap-slider .owl-nav .owl-prev {
+  left: -25px;
+}
+.wrap-slider .owl-nav .owl-next {
+  right: -25px;
 }
 .locations .tab-content {
   margin-top: 30px;
