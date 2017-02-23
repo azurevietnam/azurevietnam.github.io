@@ -4108,10 +4108,6 @@ footer .footer-wrapper {
 .section-our-menu .item-wrapper {
   margin: 0 10rem;
 }
-.section-our-menu .item-menu {
-  padding-bottom: 6rem;
-  padding-top: 6rem;
-}
 .tooltip-content {
   background-color: #fff;
   border: 1px solid #c3c3c3;
@@ -4365,7 +4361,8 @@ footer .footer-wrapper {
     transform: translateX(-50%);
   }
   .item-wrapper .item-menu {
-    padding-bottom: 0;
+    padding-bottom: 6rem;
+    padding-top: 6rem;
     border-bottom: 0;
   }
   .item-wrapper:not(:last-child) {
