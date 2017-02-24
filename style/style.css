@@ -3842,12 +3842,13 @@ header .main-menu ul li.sub-menu span {
   header .main-menu ul li.sub-menu span {
     display: none;
   }
-  header .main-menu ul li:hover > ul,
-  header .main-menu ul li:focus > ul {
+  header .main-menu ul li.sub-menu:hover > ul,
+  header .main-menu ul li.sub-menu:focus > ul {
+    display: block;
     visibility: visible;
   }
-  header .main-menu ul li:hover > ul:before,
-  header .main-menu ul li:focus > ul:before {
+  header .main-menu ul li.sub-menu:hover > ul:before,
+  header .main-menu ul li.sub-menu:focus > ul:before {
     content: '';
     border-color: transparent transparent #eeeeee transparent;
     border-style: solid;
