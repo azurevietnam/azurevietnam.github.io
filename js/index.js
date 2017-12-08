@@ -9,15 +9,7 @@ gapi.analytics.ready(function() {
      var viewSelector = new gapi.analytics.ViewSelector({
       container: 'view-selector-container'
     });
-    var viewSelector1 = new gapi.analytics.ViewSelector({
-        container: 'view-selector-1-container'
-    });
-    var viewSelector2 = new gapi.analytics.ViewSelector({
-        container: 'view-selector-2-container'
-    });
     viewSelector.execute();
-    viewSelector1.execute();
-    viewSelector2.execute();
 
     var mainChart = new gapi.analytics.googleCharts.DataChart({
       query: {
@@ -88,7 +80,7 @@ gapi.analytics.ready(function() {
       }
     });
 
-    var mainChartRowClickListener;
+  var mainChartRowClickListener;
   viewSelector.on('change', function(ids) {
     var options = {query: {ids: ids}};
       if (mainChartRowClickListener) {
@@ -97,6 +89,8 @@ gapi.analytics.ready(function() {
       mainChart.set(options).execute();
       breakdownChart.set(options)
       if (breakdownChart.get().query.filters) breakdownChart.execute();
+      dataChart1.set({query: {ids: ids}}).execute();
+      dataChart2.set({query: {ids: ids}}).execute();
   });
   mainChart.on('success', function(response) {
     var chart = response.chart;
@@ -117,13 +111,5 @@ gapi.analytics.ready(function() {
       };
       breakdownChart.set(options).execute();
     });
-  });
-
-  viewSelector1.on('change', function(ids) {
-    dataChart1.set({query: {ids: ids}}).execute();
-  });
-
-  viewSelector2.on('change', function(ids) {
-    dataChart2.set({query: {ids: ids}}).execute();
   });
 });
