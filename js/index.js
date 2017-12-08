@@ -6,15 +6,6 @@ gapi.analytics.ready(function() {
         clientid: 'CLIENT_ID',
         scope: 'SCOPES'
     });
-    gapi.auth.authorize(authData, function(response) {
-        var authButton = document.getElementById('auth-button');
-        if (response.error) {
-            authButton.hidden = false;
-        } else {
-            authButton.hidden = true;
-            queryAccounts();
-        }
-    });
     var viewSelector1 = new gapi.analytics.ViewSelector({
         container: 'view-selector-1-container'
     });
