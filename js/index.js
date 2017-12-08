@@ -6,14 +6,34 @@ gapi.analytics.ready(function() {
         clientid: clientID,
         scope: SCOPES
     });
+     var viewSelector = new gapi.analytics.ViewSelector({
+      container: 'view-selector-container'
+    });
     var viewSelector1 = new gapi.analytics.ViewSelector({
         container: 'view-selector-1-container'
     });
     var viewSelector2 = new gapi.analytics.ViewSelector({
         container: 'view-selector-2-container'
     });
+    viewSelector.execute();
     viewSelector1.execute();
     viewSelector2.execute();
+
+    var mainChart = new gapi.analytics.googleCharts.DataChart({
+      query: {
+        'dimensions': 'ga:browser',
+        'metrics': 'ga:sessions',
+        'sort': '-ga:sessions',
+        'max-results': '6'
+      },
+      chart: {
+        type: 'TABLE',
+        container: 'main-chart-container',
+        options: {
+          width: '100%'
+        }
+      }
+    });
 
     var dataChart1 = new gapi.analytics.googleCharts.DataChart({
         query: {
@@ -26,7 +46,7 @@ gapi.analytics.ready(function() {
         },
         chart: {
             container: 'chart-1-container',
-            type: 'PIE',
+            type: 'LINE',
             options: {
                 width: '100%',
                 pieHole: 4 / 9
@@ -44,17 +64,66 @@ gapi.analytics.ready(function() {
         },
         chart: {
             container: 'chart-2-container',
-            type: 'PIE',
+            type: 'LINE',
             options: {
                 width: '100%',
                 pieHole: 4 / 9
             }
         }
     });
-    viewSelector1.on('change', function(ids) {
-      dataChart1.set({query: {ids: ids}}).execute();
+
+    var breakdownChart = new gapi.analytics.googleCharts.DataChart({
+      query: {
+        'dimensions': 'ga:date',
+        'metrics': 'ga:sessions',
+        'start-date': '7daysAgo',
+        'end-date': 'yesterday'
+      },
+      chart: {
+        type: 'LINE',
+        container: 'breakdown-chart-container',
+        options: {
+          width: '100%'
+        }
+      }
     });
-    viewSelector2.on('change', function(ids) {
+
+    var mainChartRowClickListener;
+  viewSelector.on('change', function(ids) {
+    var options = {query: {ids: ids}};
+      if (mainChartRowClickListener) {
+        google.visualization.events.removeListener(mainChartRowClickListener);
+      }
+      mainChart.set(options).execute();
+      breakdownChart.set(options)
+      if (breakdownChart.get().query.filters) breakdownChart.execute();
+  });
+  mainChart.on('success', function(response) {
+    var chart = response.chart;
+    var dataTable = response.dataTable;
+    mainChartRowClickListener = google.visualization.events.addListener(chart, 'select', function(event) {
+      if (!chart.getSelection().length) return;
+      var row =  chart.getSelection()[0].row;
+      var browser =  dataTable.getValue(row, 0);
+      var options = {
+        query: {
+          filters: 'ga:browser==' + browser
+        },
+        chart: {
+          options: {
+            title: browser
+          }
+        }
+      };
+      breakdownChart.set(options).execute();
+    });
+  });
+
+  viewSelector1.on('change', function(ids) {
+    dataChart1.set({query: {ids: ids}}).execute();
+  });
+
+  viewSelector2.on('change', function(ids) {
     dataChart2.set({query: {ids: ids}}).execute();
   });
 });
