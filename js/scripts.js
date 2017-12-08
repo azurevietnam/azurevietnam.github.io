@@ -61,8 +61,8 @@ gapi.analytics.ready(function() {
       'ids': ids,
       'dimensions': 'ga:date,ga:nthDay',
       'metrics': 'ga:sessions',
-      'start-date': moment(now).subtract(1, 'day').day(0).format('DD-MM-YYYY'),
-      'end-date': moment(now).format('DD-MM-YYYY')
+      'start-date': moment(now).subtract(1, 'day').day(0).format('YYYY-MM-DD'),
+      'end-date': moment(now).format('YYYY-MM-DD')
     });
 
     var lastWeek = query({
@@ -70,9 +70,9 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:date,ga:nthDay',
       'metrics': 'ga:sessions',
       'start-date': moment(now).subtract(1, 'day').day(0).subtract(1, 'week')
-          .format('DD-MM-YYYY'),
+          .format('YYYY-MM-DD'),
       'end-date': moment(now).subtract(1, 'day').day(6).subtract(1, 'week')
-          .format('DD-MM-YYYY')
+          .format('YYYY-MM-DD')
     });
 
     Promise.all([thisWeek, lastWeek]).then(function(results) {
@@ -82,7 +82,7 @@ gapi.analytics.ready(function() {
       var labels = results[1].rows.map(function(row) { return +row[0]; });
 
       labels = labels.map(function(label) {
-        return moment(label, 'DD-MM-YYYY').format('ddd');
+        return moment(label, 'YYYY-MM-DD').format('ddd');
       });
 
       var data = {
@@ -121,8 +121,8 @@ gapi.analytics.ready(function() {
       'ids': ids,
       'dimensions': 'ga:month,ga:nthMonth',
       'metrics': 'ga:users',
-      'start-date': moment(now).date(1).month(0).format('DD-MM-YYYY'),
-      'end-date': moment(now).format('DD-MM-YYYY')
+      'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
+      'end-date': moment(now).format('YYYY-MM-DD')
     });
 
     var lastYear = query({
@@ -130,9 +130,9 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:month,ga:nthMonth',
       'metrics': 'ga:users',
       'start-date': moment(now).subtract(1, 'year').date(1).month(0)
-          .format('DD-MM-YYYY'),
+          .format('YYYY-MM-DD'),
       'end-date': moment(now).date(1).month(0).subtract(1, 'day')
-          .format('DD-MM-YYYY')
+          .format('YYYY-MM-DD')
     });
 
     Promise.all([thisYear, lastYear]).then(function(results) {
