@@ -198,7 +198,7 @@ gapi.analytics.ready(function() {
       });
 
       new Chart(makeCanvas('chart-3-container'), {
-        type: "doughnut",
+        type: "pie",
         data: data,
       });
       generateLegend('legend-3-container', data);
@@ -228,7 +228,7 @@ gapi.analytics.ready(function() {
       });
 
       new Chart(makeCanvas('chart-4-container'), {
-        type: "doughnut",
+        type: "pie",
         data: data,
       });
       generateLegend('legend-4-container', data);
