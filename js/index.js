@@ -1,7 +1,7 @@
 gapi.analytics.ready(function() {
     gapi.analytics.auth.authorize({
         container: 'embed-api-auth-container',
-        clientid: 'UA-108605429-1'
+        clientid: '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com'
     });
     var viewSelector = new gapi.analytics.ViewSelector({
         container: 'view-selector-container'
