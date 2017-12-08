@@ -38,7 +38,7 @@ gapi.analytics.ready(function() {
         },
         chart: {
             container: 'chart-1-container',
-            type: 'LINE',
+            type: 'PIE',
             options: {
                 width: '100%',
                 pieHole: 4 / 9
@@ -56,7 +56,7 @@ gapi.analytics.ready(function() {
         },
         chart: {
             container: 'chart-2-container',
-            type: 'LINE',
+            type: 'PIE',
             options: {
                 width: '100%',
                 pieHole: 4 / 9
