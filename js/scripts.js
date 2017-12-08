@@ -210,7 +210,7 @@ gapi.analytics.ready(function() {
       var data = [];
       var colors = ['#4D5360','#949FB1','#D4CCC5','#E2EAE9','#F7464A'];
 
-      response.forEach(function(row, i) {
+      response.rows.forEach(function(row, i) {
         data.push({
           label: row[0],
           value: +row[1],
