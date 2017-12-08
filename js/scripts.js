@@ -107,7 +107,7 @@ gapi.analytics.ready(function() {
         ]
       };
 
-      new Chart(makeCanvas('chart-1-container').Line(data));
+      new Chart(makeCanvas('chart-1-container')).Line(data);
       generateLegend('legend-1-container', data.datasets);
     });
   }
@@ -164,7 +164,7 @@ gapi.analytics.ready(function() {
         ]
       };
 
-      new Chart(makeCanvas('chart-2-container').Bar(data));
+      new Chart(makeCanvas('chart-2-container')).Bar(data);
       generateLegend('legend-2-container', data.datasets);
     })
     .catch(function(err) {
@@ -191,7 +191,7 @@ gapi.analytics.ready(function() {
         data.push({ value: +row[1], color: colors[i], label: row[0] });
       });
 
-      new Chart(makeCanvas('chart-3-container').Pie(data));
+      new Chart(makeCanvas('chart-3-container')).Pie(data);
       generateLegend('legend-3-container', data);
     });
   }
@@ -218,7 +218,7 @@ gapi.analytics.ready(function() {
         });
       });
 
-      new Chart(makeCanvas('chart-4-container').Pie(data));
+      new Chart(makeCanvas('chart-4-container')).Pie(data);
       generateLegend('legend-4-container', data);
     });
   }
