@@ -109,7 +109,7 @@ gapi.analytics.ready(function() {
 
       new Chart(makeCanvas('chart-1-container'), {
           type: "line",
-          data: data,
+          data: data
       });
       generateLegend('legend-1-container', data.datasets);
     });
@@ -169,7 +169,7 @@ gapi.analytics.ready(function() {
 
       new Chart(makeCanvas('chart-2-container'), {
         type: "bar",
-        data: data,
+        data: data
       });
       generateLegend('legend-2-container', data.datasets);
     })
@@ -200,6 +200,7 @@ gapi.analytics.ready(function() {
       new Chart(makeCanvas('chart-3-container'), {
         type: "polarArea",
         data: data,
+        labels: label
       });
       generateLegend('legend-3-container', data);
     });
@@ -230,6 +231,7 @@ gapi.analytics.ready(function() {
       new Chart(makeCanvas('chart-4-container'), {
         type: "polarArea",
         data: data,
+        labels: label
       });
       generateLegend('legend-4-container', data);
     });
