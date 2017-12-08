@@ -107,7 +107,10 @@ gapi.analytics.ready(function() {
         ]
       };
 
-      new Chart(makeCanvas('chart-1-container')).Line(data);
+      new Chart(makeCanvas('chart-1-container').getContext('2d') , {
+          type: "line",
+          data: data,
+      });
       generateLegend('legend-1-container', data.datasets);
     });
   }
@@ -164,7 +167,10 @@ gapi.analytics.ready(function() {
         ]
       };
 
-      new Chart(makeCanvas('chart-2-container')).Bar(data);
+      new Chart(makeCanvas('chart-2-container'), {
+        type: "bar",
+        data: data,
+      });
       generateLegend('legend-2-container', data.datasets);
     })
     .catch(function(err) {
@@ -218,7 +224,10 @@ gapi.analytics.ready(function() {
         });
       });
 
-      new Chart(makeCanvas('chart-4-container')).Doughnut(data);
+      new Chart(makeCanvas('chart-4-container'), {
+        type: "doughnut",
+        data: data,
+      });
       generateLegend('legend-4-container', data);
     });
   }
