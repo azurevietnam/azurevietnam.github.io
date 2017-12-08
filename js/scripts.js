@@ -107,7 +107,7 @@ gapi.analytics.ready(function() {
         ]
       };
 
-      new Chart(makeCanvas('chart-1-container').getContext('2d') , {
+      new Chart(makeCanvas('chart-1-container'), {
           type: "line",
           data: data,
       });
@@ -197,7 +197,10 @@ gapi.analytics.ready(function() {
         data.push({ value: +row[1], color: colors[i], label: row[0] });
       });
 
-      new Chart(makeCanvas('chart-3-container')).Doughnut(data);
+      new Chart(makeCanvas('chart-3-container'), {
+        type: "doughnut",
+        data: data,
+      });
       generateLegend('legend-3-container', data);
     });
   }
