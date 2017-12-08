@@ -1,10 +1,10 @@
 gapi.analytics.ready(function() {
-    var CLIENT_ID = '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com';
+    var clientID = '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com';
     var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
     gapi.analytics.auth.authorize({
         container: 'embed-api-auth-container',
-        clientid: 'CLIENT_ID',
-        scope: 'SCOPES'
+        clientid: clientID,
+        scope: SCOPES
     });
     var viewSelector1 = new gapi.analytics.ViewSelector({
         container: 'view-selector-1-container'
