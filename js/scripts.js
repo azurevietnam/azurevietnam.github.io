@@ -198,9 +198,8 @@ gapi.analytics.ready(function() {
       });
 
       new Chart(makeCanvas('chart-3-container'), {
-        type: "polarArea",
+        type: "pie",
         data: data,
-        labels: label
       });
       generateLegend('legend-3-container', data);
     });
@@ -229,9 +228,8 @@ gapi.analytics.ready(function() {
       });
 
       new Chart(makeCanvas('chart-4-container'), {
-        type: "polarArea",
+        type: "pie",
         data: data,
-        labels: label
       });
       generateLegend('legend-4-container', data);
     });
