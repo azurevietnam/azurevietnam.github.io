@@ -1,30 +1,18 @@
 gapi.analytics.ready(function() {
 
-  /**
-   * Authorize the user immediately if the user has already granted access.
-   * If no access has been created, render an authorize button inside the
-   * element with the ID "embed-api-auth-container".
-   */
+  var clientID = '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com';
+  var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
   gapi.analytics.auth.authorize({
-    container: 'embed-api-auth-container',
-    clientid: 'REPLACE WITH YOUR CLIENT ID'
+      container: 'embed-api-auth-container',
+      clientid: clientID,
+      scope: SCOPES
   });
 
-
-  /**
-   * Create a new ActiveUsers instance to be rendered inside of an
-   * element with the id "active-users-container" and poll for changes every
-   * five seconds.
-   */
   var activeUsers = new gapi.analytics.ext.ActiveUsers({
     container: 'active-users-container',
     pollingInterval: 5
   });
 
-
-  /**
-   * Add CSS animation to visually show the when users come and go.
-   */
   activeUsers.once('success', function() {
     var element = this.container.firstChild;
     var timeout;
@@ -42,11 +30,6 @@ gapi.analytics.ready(function() {
     });
   });
 
-
-  /**
-   * Create a new ViewSelector2 instance to be rendered inside of an
-   * element with the id "view-selector-container".
-   */
   var viewSelector = new gapi.analytics.ext.ViewSelector2({
     container: 'view-selector-container',
   })
@@ -78,8 +61,8 @@ gapi.analytics.ready(function() {
       'ids': ids,
       'dimensions': 'ga:date,ga:nthDay',
       'metrics': 'ga:sessions',
-      'start-date': moment(now).subtract(1, 'day').day(0).format('YYYY-MM-DD'),
-      'end-date': moment(now).format('YYYY-MM-DD')
+      'start-date': moment(now).subtract(1, 'day').day(0).format('DD-MM-YYYY'),
+      'end-date': moment(now).format('DD-MM-YYYY')
     });
 
     var lastWeek = query({
@@ -87,9 +70,9 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:date,ga:nthDay',
       'metrics': 'ga:sessions',
       'start-date': moment(now).subtract(1, 'day').day(0).subtract(1, 'week')
-          .format('YYYY-MM-DD'),
+          .format('DD-MM-YYYY'),
       'end-date': moment(now).subtract(1, 'day').day(6).subtract(1, 'week')
-          .format('YYYY-MM-DD')
+          .format('DD-MM-YYYY')
     });
 
     Promise.all([thisWeek, lastWeek]).then(function(results) {
@@ -99,7 +82,7 @@ gapi.analytics.ready(function() {
       var labels = results[1].rows.map(function(row) { return +row[0]; });
 
       labels = labels.map(function(label) {
-        return moment(label, 'YYYYMMDD').format('ddd');
+        return moment(label, 'DD-MM-YYYY').format('ddd');
       });
 
       var data = {
@@ -138,8 +121,8 @@ gapi.analytics.ready(function() {
       'ids': ids,
       'dimensions': 'ga:month,ga:nthMonth',
       'metrics': 'ga:users',
-      'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
-      'end-date': moment(now).format('YYYY-MM-DD')
+      'start-date': moment(now).date(1).month(0).format('DD-MM-YYYY'),
+      'end-date': moment(now).format('DD-MM-YYYY')
     });
 
     var lastYear = query({
@@ -147,16 +130,16 @@ gapi.analytics.ready(function() {
       'dimensions': 'ga:month,ga:nthMonth',
       'metrics': 'ga:users',
       'start-date': moment(now).subtract(1, 'year').date(1).month(0)
-          .format('YYYY-MM-DD'),
+          .format('DD-MM-YYYY'),
       'end-date': moment(now).date(1).month(0).subtract(1, 'day')
-          .format('YYYY-MM-DD')
+          .format('DD-MM-YYYY')
     });
 
     Promise.all([thisYear, lastYear]).then(function(results) {
       var data1 = results[0].rows.map(function(row) { return +row[2]; });
       var data2 = results[1].rows.map(function(row) { return +row[2]; });
-      var labels = ['Jan','Feb','Mar','Apr','May','Jun',
-                    'Jul','Aug','Sep','Oct','Nov','Dec'];
+      var labels = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+                    'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
 
       for (var i = 0, len = labels.length; i < len; i++) {
         if (data1[i] === undefined) data1[i] = null;
