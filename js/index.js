@@ -7,35 +7,63 @@ gapi.analytics.ready(function() {
         scope: 'SCOPES'
     });
     gapi.auth.authorize(authData, function(response) {
-      var authButton = document.getElementById('auth-button');
-      if (response.error) {
-        authButton.hidden = false;
-      }
-      else {
-        authButton.hidden = true;
-        queryAccounts();
-      }
+        var authButton = document.getElementById('auth-button');
+        if (response.error) {
+            authButton.hidden = false;
+        } else {
+            authButton.hidden = true;
+            queryAccounts();
+        }
     });
-    var viewSelector = new gapi.analytics.ViewSelector({
-        container: 'view-selector-container'
+    var viewSelector1 = new gapi.analytics.ViewSelector({
+        container: 'view-selector-1-container'
     });
-    viewSelector.execute();
-    var dataChart = new gapi.analytics.googleCharts.DataChart({
+    var viewSelector2 = new gapi.analytics.ViewSelector({
+        container: 'view-selector-2-container'
+    });
+    viewSelector1.execute();
+    viewSelector2.execute();
+
+    var dataChart1 = new gapi.analytics.googleCharts.DataChart({
         query: {
             metrics: 'ga:sessions',
             dimensions: 'ga:date',
             'start-date': '30daysAgo',
-            'end-date': 'yesterday'
+            'end-date': 'yesterday',
+            'max-results': 6,
+            sort: '-ga:sessions'
         },
         chart: {
-            container: 'chart-container',
-            type: 'LINE',
+            container: 'chart-1-container',
+            type: 'PIE',
             options: {
-                width: '100%'
+                width: '100%',
+                pieHole: 4 / 9
             }
         }
     });
-    viewSelector.on('change', function(ids) {
-        dataChart.set({ query: { ids: ids } }).execute();
+    var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+        query: {
+            metrics: 'ga:sessions',
+            dimensions: 'ga:country',
+            'start-date': '30daysAgo',
+            'end-date': 'yesterday',
+            'max-results': 6,
+            sort: '-ga:sessions'
+        },
+        chart: {
+            container: 'chart-2-container',
+            type: 'PIE',
+            options: {
+                width: '100%',
+                pieHole: 4 / 9
+            }
+        }
     });
+    viewSelector1.on('change', function(ids) {
+      dataChart1.set({query: {ids: ids}}).execute();
+    });
+    viewSelector2.on('change', function(ids) {
+    dataChart2.set({query: {ids: ids}}).execute();
+  });
 });
