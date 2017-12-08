@@ -1,7 +1,20 @@
 gapi.analytics.ready(function() {
+    var CLIENT_ID = '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com';
+    var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
     gapi.analytics.auth.authorize({
         container: 'embed-api-auth-container',
-        clientid: '655224599525-3sciflmg9phgn3uestlml3vcab0qjedo.apps.googleusercontent.com'
+        clientid: 'CLIENT_ID',
+        scope: 'SCOPES'
+    });
+    gapi.auth.authorize(authData, function(response) {
+      var authButton = document.getElementById('auth-button');
+      if (response.error) {
+        authButton.hidden = false;
+      }
+      else {
+        authButton.hidden = true;
+        queryAccounts();
+      }
     });
     var viewSelector = new gapi.analytics.ViewSelector({
         container: 'view-selector-container'
