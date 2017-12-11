@@ -92,7 +92,7 @@
                   //user is not connected to your app or logged out
                   button.innerHTML = 'Login';
                   button.onclick = function() {
-                      showLoader(true);
+                      showLoader(false);
                       FB.login(function(response) {
                           if (response.authResponse) {
                               FB.api('/me', function(info) {
@@ -100,7 +100,7 @@
                               });
                           } else {
                               //user cancelled login or did not grant authorization
-                              showLoader(false);
+                              showLoader(true);
                           }
                       }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me' });
                   }
@@ -121,7 +121,7 @@
           if (response.authResponse) {
               userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
               button.innerHTML = 'Logout';
-              showLoader(true);
+              showLoader(false);
           }
       }
 
