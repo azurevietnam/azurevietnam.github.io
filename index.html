@@ -20,11 +20,6 @@
           <div id="status"></div>
           <button id="fb-auth">Login</button>
           <div id="user-info"></div>
-          <div id="other" style="display:none">
-              <p><a href="#" onclick="showStream(); return false;">Publish Wall Post</a></p>
-              <p><a href="#" onclick="share(); return false;">Share With Your Friends</a></p>
-              <p><textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea></p>
-          </div>
         </div>
         <div id="embed-api-auth-container"></div>
         <div id="view-selector-container"></div>
@@ -123,11 +118,9 @@
     function login(response, info) {
         if (response.authResponse) {
             var accessToken = response.authResponse.accessToken;
-
             userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
             button.innerHTML = 'Logout';
             showLoader(false);
-            document.getElementById('other').style.display = "block";
         }
     }
 
