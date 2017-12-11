@@ -1,79 +1,285 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Google Analytics API</title>
-  <meta name="google-site-verification" content="xoZ8pgnT3i6dJgQzfaDQ52EugxEdHxYheub5f4Kln0c" />
-  <link rel=stylesheet href="css/chartjs-visualizations.css">
-  <link rel=stylesheet href="css/styles.css">
+    <meta charset="UTF-8">
+    <title>Google Analytics API</title>
+    <meta name="google-site-verification" content="xoZ8pgnT3i6dJgQzfaDQ52EugxEdHxYheub5f4Kln0c" />
+    <link rel=stylesheet href="css/chartjs-visualizations.css">
+    <link rel=stylesheet href="css/styles.css">
 </head>
 
 <body>
-<header>
-  <div id="fb-root"></div>
-  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
-  <div id="status"></div>
-  <div id="embed-api-auth-container"></div>
-  <div id="view-selector-container"></div>
-  <div id="view-name"></div>
-  <div id="active-users-container"></div>
-</header>
-<div class="Chartjs">
-  <h3>So sánh tuần này và tuần trước (Thống kê bởi phiên làm việc)</h3>
-  <figure class="Chartjs-figure" id="chart-1-container"></figure>
-  <ol class="Chartjs-legend" id="legend-1-container"></ol>
-</div>
-<div class="Chartjs">
-  <h3>So sánh năm này với năm trước (Thống kê bởi người dùng)</h3>
-  <figure class="Chartjs-figure" id="chart-2-container"></figure>
-  <ol class="Chartjs-legend" id="legend-2-container"></ol>
-</div>
-<div class="Chartjs">
-  <h3>Các trình duyệt truy cập (Thống kê bởi số lần xem trang)</h3>
-  <figure class="Chartjs-figure" id="chart-3-container"></figure>
-  <ol class="Chartjs-legend" id="legend-3-container"></ol>
-</div>
-<div class="Chartjs">
-  <h3>Các quốc gia truy cập (Thống kê bởi phiên làm việc)</h3>
-  <figure class="Chartjs-figure" id="chart-4-container"></figure>
-  <ol class="Chartjs-legend" id="legend-4-container"></ol>
-</div>
+    <header>
+        <div id="fb-root"></div>
+        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+        h3>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | Thinkdiff.net</h3>
+        <button id="fb-auth">Login</button>
+        <div id="loader" style="display:none">
+            <img src="ajax-loader.gif" alt="loading" />
+        </div>
+        <br />
+        <div id="user-info"></div>
+        <br />
+        <div id="debug"></div>
 
-<script>
-(function(w,d,s,g,js,fs){
-  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
-  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-  js.src='https://apis.google.com/js/platform.js';
-  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
-}(window,document,'script'));
-</script>
+        <div id="other" style="display:none">
+            <a href="#" onclick="showStream(); return false;">Publish Wall Post</a> |
+            <a href="#" onclick="share(); return false;">Share With Your Friends</a> |
+            <a href="#" onclick="graphStreamPublish(); return false;">Publish Stream Using Graph API</a> |
+            <a href="#" onclick="fqlQuery(); return false;">FQL Query Example</a>
+
+            <br />
+            <textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea>
+            <br />
+            <a href="#" onclick="setStatus(); return false;">Status Set Using Legacy Api Call</a>
+        </div>
+        <div id="embed-api-auth-container"></div>
+        <div id="view-selector-container"></div>
+        <div id="view-name"></div>
+        <div id="active-users-container"></div>
+    </header>
+    <div class="Chartjs">
+        <h3>So sánh tuần này và tuần trước (Thống kê bởi phiên làm việc)</h3>
+        <figure class="Chartjs-figure" id="chart-1-container"></figure>
+        <ol class="Chartjs-legend" id="legend-1-container"></ol>
+    </div>
+    <div class="Chartjs">
+        <h3>So sánh năm này với năm trước (Thống kê bởi người dùng)</h3>
+        <figure class="Chartjs-figure" id="chart-2-container"></figure>
+        <ol class="Chartjs-legend" id="legend-2-container"></ol>
+    </div>
+    <div class="Chartjs">
+        <h3>Các trình duyệt truy cập (Thống kê bởi số lần xem trang)</h3>
+        <figure class="Chartjs-figure" id="chart-3-container"></figure>
+        <ol class="Chartjs-legend" id="legend-3-container"></ol>
+    </div>
+    <div class="Chartjs">
+        <h3>Các quốc gia truy cập (Thống kê bởi phiên làm việc)</h3>
+        <figure class="Chartjs-figure" id="chart-4-container"></figure>
+        <ol class="Chartjs-legend" id="legend-4-container"></ol>
+    </div>
+    <script>
+    (function(w, d, s, g, js, fs) {
+        g = w.gapi || (w.gapi = {});
+        g.analytics = { q: [], ready: function(f) { this.q.push(f); } };
+        js = d.createElement(s);
+        fs = d.getElementsByTagName(s)[0];
+        js.src = 'https://apis.google.com/js/platform.js';
+        fs.parentNode.insertBefore(js, fs);
+        js.onload = function() { g.load('analytics'); };
+    }(window, document, 'script'));
+    </script>
+    <script>
+    /*window.fbAsyncInit = function() {
+        testAPI();
+      };
+      function testAPI() {
+        FB.api('/me', 'GET', {"fields":"id,name,email,address,birthday,age_range"},
+          function(response) {
+            document.getElementById('status').innerHTML = 'Thanks for logging in';
+          });
+        console.log(name);
+      };
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=941854605876088';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));*/
+    var button;
+    var userInfo;
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '941854605876088', //change the appId to your appId
+            status: true,
+            cookie: true,
+            xfbml: true,
+            oauth: true
+        });
+        showLoader(true);
+
+        function updateButton(response) {
+            button = document.getElementById('fb-auth');
+            userInfo = document.getElementById('user-info');
+
+            if (response.authResponse) {
+                //user is already logged in and connected
+                FB.api('/me', function(info) {
+                    login(response, info);
+                });
+
+                button.onclick = function() {
+                    FB.logout(function(response) {
+                        logout(response);
+                    });
+                };
+            } else {
+                //user is not connected to your app or logged out
+                button.innerHTML = 'Login';
+                button.onclick = function() {
+                    showLoader(true);
+                    FB.login(function(response) {
+                        if (response.authResponse) {
+                            FB.api('/me', function(info) {
+                                login(response, info);
+                            });
+                        } else {
+                            //user cancelled login or did not grant authorization
+                            showLoader(false);
+                        }
+                    }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me' });
+                }
+            }
+        }
+
+        // run once with current status and whenever the status changes
+        FB.getLoginStatus(updateButton);
+        FB.Event.subscribe('auth.statusChange', updateButton);
+    };
+    (function() {
+        var e = document.createElement('script');
+        e.async = true;
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    }());
 
 
-<script>
-  window.fbAsyncInit = function() {
-    testAPI();
-  };
-  function testAPI() {
-    FB.api('/me', 'GET', {"fields":"id,name,email,address,birthday,age_range"},
-      function(response) {
-        document.getElementById('status').innerHTML = 'Thanks for logging in';
-      });
-    console.log(name);
-  };
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=941854605876088';
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="js/date-range-selector.js"></script>
-<script src="js/view-selector2.js"></script>
-<script src="js/active-users.js"></script>
-<script src="js/scripts.js"></script>
+    function login(response, info) {
+        if (response.authResponse) {
+            var accessToken = response.authResponse.accessToken;
+
+            userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name +
+                "<br /> Your Access Token: " + accessToken;
+            button.innerHTML = 'Logout';
+            showLoader(false);
+            document.getElementById('other').style.display = "block";
+        }
+    }
+
+    function logout(response) {
+        userInfo.innerHTML = "";
+        document.getElementById('debug').innerHTML = "";
+        document.getElementById('other').style.display = "none";
+        showLoader(false);
+    }
+    //stream publish method
+    function streamPublish(name, description, hrefTitle, hrefLink, userPrompt) {
+        showLoader(true);
+        FB.ui({
+                method: 'stream.publish',
+                message: '',
+                attachment: {
+                    name: name,
+                    caption: '',
+                    description: (description),
+                    href: hrefLink
+                },
+                action_links: [
+                    { text: hrefTitle, href: hrefLink }
+                ],
+                user_prompt_message: userPrompt
+            },
+            function(response) {
+                showLoader(false);
+            });
+    }
+
+    function showStream() {
+        FB.api('/me', function(response) {
+            //console.log(response.id);
+            streamPublish(response.name, 'I like the articles of Thinkdiff.net', 'hrefTitle', 'https://azurevietnam.github.io', "Share thinkdiff.net");
+        });
+    }
+
+    function share() {
+        showLoader(true);
+        var share = {
+            method: 'stream.share',
+            u: 'https://azurevietnam.github.io'
+        };
+        FB.ui(share, function(response) {
+            showLoader(false);
+            console.log(response);
+        });
+    }
+
+    function graphStreamPublish() {
+        showLoader(true);
+
+        FB.api('/me/feed', 'post', {
+                message: "Facebook app development tutorials",
+                link: 'https://azurevietnam.github.io',
+                picture: 'https://azurevietnam.github.io/images/Moonit_App_Icon.png',
+                name: 'Applications',
+                description: 'Checkout Facebook app development tutorials'
+
+            },
+            function(response) {
+                showLoader(false);
+
+                if (!response || response.error) {
+                    alert('Error occured');
+                } else {
+                    alert('Post ID: ' + response.id);
+                }
+            });
+    }
+
+    function fqlQuery() {
+        showLoader(true);
+
+        FB.api('/me', function(response) {
+            showLoader(false);
+
+            //http://developers.facebook.com/docs/reference/fql/user/
+            var query = FB.Data.query('select name, profile_url, sex, pic_small from user where uid={0}', response.id);
+            query.wait(function(rows) {
+                document.getElementById('debug').innerHTML =
+                    'FQL Information: ' + "<br />" +
+                    'Your name: ' + rows[0].name + "<br />" +
+                    'Your Sex: ' + (rows[0].sex != undefined ? rows[0].sex : "") + "<br />" +
+                    'Your Profile: ' + "<a href='" + rows[0].profile_url + "'>" + rows[0].profile_url + "</a>" + "<br />" +
+                    '<img src="' + rows[0].pic_small + '" alt="" />' + "<br />";
+            });
+        });
+    }
+
+    function setStatus() {
+        showLoader(true);
+
+        status1 = document.getElementById('status').value;
+        FB.api({
+                method: 'status.set',
+                status: status1
+            },
+            function(response) {
+                if (response == 0) {
+                    alert('Your facebook status not updated. Give Status Update Permission.');
+                } else {
+                    alert('Your facebook status updated');
+                }
+                showLoader(false);
+            }
+        );
+    }
+
+    function showLoader(status) {
+        if (status)
+            document.getElementById('loader').style.display = 'block';
+        else
+            document.getElementById('loader').style.display = 'none';
+    }
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="js/date-range-selector.js"></script>
+    <script src="js/view-selector2.js"></script>
+    <script src="js/active-users.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
+
 </html>
