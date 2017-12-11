@@ -59,9 +59,7 @@
       'GET',
       {"fields":"id,name,email,address,birthday,age_range"},
       function(response) {
-        document.getElementById('status').innerHTML = '<p>Thanks for logging in</p>'+
-                                                      '<p>'name'<p>'+
-                                                      '<p>'email'</p>';
+        document.getElementById('status').innerHTML = '<p>Thanks for logging in</p>'+'<p>' + name +'<p>'+'<p>'+email +'</p>';
       }
     );
   };
