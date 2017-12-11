@@ -138,8 +138,8 @@ gapi.analytics.ready(function() {
     Promise.all([thisYear, lastYear]).then(function(results) {
       var data1 = results[0].rows.map(function(row) { return +row[2]; });
       var data2 = results[1].rows.map(function(row) { return +row[2]; });
-      var labels = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
-                    'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+      var labels = ['Jan','Feb','Mar','Apr','May','Jun',
+                    'Jul','Aug','Sep','Oct','Nov','Dec'];
 
       for (var i = 0, len = labels.length; i < len; i++) {
         if (data1[i] === undefined) data1[i] = null;
@@ -268,3 +268,8 @@ gapi.analytics.ready(function() {
     return div.innerHTML;
   }
 });
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}

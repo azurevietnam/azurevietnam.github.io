@@ -10,6 +10,11 @@
 
 <body>
 <header>
+  <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+  <fb:login-button
+    scope="public_profile,email"
+    onlogin="checkLoginState();">
+  </fb:login-button>
   <div id="embed-api-auth-container"></div>
   <div id="view-selector-container"></div>
   <div id="view-name"></div>
@@ -46,6 +51,44 @@
 </script>
 
 
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1593559867349118',
+      cookie     : true,
+      xfbml      : true,
+      version    : '2.10'
+    });
+    FB.AppEvents.logPageView();
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+    FB.login(function(response) {
+      console.log(response);
+    }, {scope: 'email,user_likes'});
+    FB.login(function(response) {
+        console.log(response);
+    }, {
+        scope: 'publish_actions',
+        return_scopes: true
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
