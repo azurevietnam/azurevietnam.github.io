@@ -12,6 +12,7 @@
 <header>
   <div id="fb-root"></div>
   <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+  <div id="status"></div>
   <div id="embed-api-auth-container"></div>
   <div id="view-selector-container"></div>
   <div id="view-name"></div>
@@ -58,21 +59,15 @@
     });
 
     FB.AppEvents.logPageView();
-
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
+    function testAPI() {
+      console.log('Welcome!  Fetching your information.... ');
+      scope: 'email,user_friends,publish_actions,user_likes,user_relationships,user_location'
+      FB.api('/me', function(response) {
+        console.log('Successful login for: ' + response.name);
+        document.getElementById('status').innerHTML =
+          'Thanks for logging in, ' + response.name + '!';
       });
-    };
-
-    function fblogin(){
-      FB.login(function(response) {
-        console.log(response);
-      }, {
-        scope: 'email,user_friends,publish_actions,user_likes,user_relationships,user_location'
-      });
-    };
-
+    }
   };
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
