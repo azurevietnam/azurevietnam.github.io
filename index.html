@@ -10,29 +10,24 @@
 </head>
 
 <body>
-  <div id="loader"></div>
+    <div id="loader" style="display:none">
+        <img src="ajax-loader.gif" alt="loading" />
+    </div>
     <header>
-        <h3>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | azurevietnam.github.io</h3>
-        <div id="fb-root"></div>
-        <button id="fb-auth">Login</button>
-        <div id="loader" style="display:none">
-            <img src="ajax-loader.gif" alt="loading" />
-        </div>
-        <br />
-        <div id="user-info"></div>
-        <br />
-        <div id="debug"></div>
-
-        <div id="other" style="display:none">
-            <a href="#" onclick="showStream(); return false;">Publish Wall Post</a> |
-            <a href="#" onclick="share(); return false;">Share With Your Friends</a> |
-            <a href="#" onclick="graphStreamPublish(); return false;">Publish Stream Using Graph API</a> |
-            <a href="#" onclick="fqlQuery(); return false;">FQL Query Example</a>
-
-            <br />
-            <textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea>
-            <br />
-            <a href="#" onclick="setStatus(); return false;">Status Set Using Legacy Api Call</a>
+        <div class="facebook">
+          <h3>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | azurevietnam.github.io</h3>
+          <div id="fb-root"></div>
+          <div id="status"></div>
+          <button id="fb-auth">Login</button>
+          <div id="user-info"></div>
+          <div id="other" style="display:none">
+              <p><a href="#" onclick="showStream(); return false;">Publish Wall Post</a></p>
+              <p><a href="#" onclick="share(); return false;">Share With Your Friends</a></p>
+              <p><a href="#" onclick="graphStreamPublish(); return false;">Publish Stream Using Graph API</a></p>
+              <p><a href="#" onclick="fqlQuery(); return false;">FQL Query Example</a></p>
+              <p><textarea id="status" cols="50" rows="5">Write your status here and click 'Status Set Using Legacy Api Call'</textarea></p>
+              <p><a href="#" onclick="setStatus(); return false;">Status Set Using Legacy Api Call</a></p>
+          </div>
         </div>
         <div id="embed-api-auth-container"></div>
         <div id="view-selector-container"></div>
@@ -186,46 +181,46 @@
         });
     }
 
-    function graphStreamPublish() {
-        showLoader(true);
+    // function graphStreamPublish() {
+    //     showLoader(true);
 
-        FB.api('/me/feed', 'post', {
-                message: "Facebook app development tutorials",
-                link: 'https://azurevietnam.github.io',
-                picture: 'https://azurevietnam.github.io/images/Moonit_App_Icon.png',
-                name: 'Applications',
-                description: 'Checkout Facebook app development tutorials'
+    //     FB.api('/me/feed', 'post', {
+    //             message: "Facebook app development tutorials",
+    //             link: 'https://azurevietnam.github.io',
+    //             picture: 'https://azurevietnam.github.io/images/Moonit_App_Icon.png',
+    //             name: 'Applications',
+    //             description: 'Checkout Facebook app development tutorials'
 
-            },
-            function(response) {
-                showLoader(false);
+    //         },
+    //         function(response) {
+    //             showLoader(false);
 
-                if (!response || response.error) {
-                    alert('Error occured');
-                } else {
-                    alert('Post ID: ' + response.id);
-                }
-            });
-    }
+    //             if (!response || response.error) {
+    //                 alert('Error occured');
+    //             } else {
+    //                 alert('Post ID: ' + response.id);
+    //             }
+    //         });
+    // }
 
-    function fqlQuery() {
-        showLoader(true);
+    // function fqlQuery() {
+    //     showLoader(true);
 
-        FB.api('/me', function(response) {
-            showLoader(false);
+    //     FB.api('/me', function(response) {
+    //         showLoader(false);
 
-            //http://developers.facebook.com/docs/reference/fql/user/
-            var query = FB.Data.query('select name, profile_url, sex, pic_small from user where uid={0}', response.id);
-            query.wait(function(rows) {
-                document.getElementById('debug').innerHTML =
-                    'FQL Information: ' + "<br />" +
-                    'Your name: ' + rows[0].name + "<br />" +
-                    'Your Sex: ' + (rows[0].sex != undefined ? rows[0].sex : "") + "<br />" +
-                    'Your Profile: ' + "<a href='" + rows[0].profile_url + "'>" + rows[0].profile_url + "</a>" + "<br />" +
-                    '<img src="' + rows[0].pic_small + '" alt="" />' + "<br />";
-            });
-        });
-    }
+    //         //http://developers.facebook.com/docs/reference/fql/user/
+    //         var query = FB.Data.query('select name, profile_url, sex, pic_small from user where uid={0}', response.id);
+    //         query.wait(function(rows) {
+    //             document.getElementById('debug').innerHTML =
+    //                 'FQL Information: ' + "<br />" +
+    //                 'Your name: ' + rows[0].name + "<br />" +
+    //                 'Your Sex: ' + (rows[0].sex != undefined ? rows[0].sex : "") + "<br />" +
+    //                 'Your Profile: ' + "<a href='" + rows[0].profile_url + "'>" + rows[0].profile_url + "</a>" + "<br />" +
+    //                 '<img src="' + rows[0].pic_small + '" alt="" />' + "<br />";
+    //         });
+    //     });
+    // }
 
     function setStatus() {
         showLoader(true);
