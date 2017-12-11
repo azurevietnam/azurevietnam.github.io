@@ -268,4 +268,3 @@ gapi.analytics.ready(function() {
     return div.innerHTML;
   }
 });
-
