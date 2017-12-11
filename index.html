@@ -10,10 +10,10 @@
 </head>
 
 <body>
+  <div id="loader"></div>
     <header>
+        <h3>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | azurevietnam.github.io</h3>
         <div id="fb-root"></div>
-        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
-        h3>New JavaScript SDK & OAuth 2.0 based FBConnect Tutorial | Thinkdiff.net</h3>
         <button id="fb-auth">Login</button>
         <div id="loader" style="display:none">
             <img src="ajax-loader.gif" alt="loading" />
@@ -71,74 +71,56 @@
     }(window, document, 'script'));
     </script>
     <script>
-    /*window.fbAsyncInit = function() {
-        testAPI();
-      };
-      function testAPI() {
-        FB.api('/me', 'GET', {"fields":"id,name,email,address,birthday,age_range"},
-          function(response) {
-            document.getElementById('status').innerHTML = 'Thanks for logging in';
+      var button;
+      var userInfo;
+      window.fbAsyncInit = function() {
+          FB.init({
+              appId: '941854605876088', //change the appId to your appId
+              status: true,
+              cookie: true,
+              xfbml: true,
+              oauth: true
           });
-        console.log(name);
+          showLoader(true);
+
+          function updateButton(response) {
+              button = document.getElementById('fb-auth');
+              userInfo = document.getElementById('user-info');
+
+              if (response.authResponse) {
+                  //user is already logged in and connected
+                  FB.api('/me', function(info) {
+                      login(response, info);
+                  });
+
+                  button.onclick = function() {
+                      FB.logout(function(response) {
+                          logout(response);
+                      });
+                  };
+              } else {
+                  //user is not connected to your app or logged out
+                  button.innerHTML = 'Login';
+                  button.onclick = function() {
+                      showLoader(true);
+                      FB.login(function(response) {
+                          if (response.authResponse) {
+                              FB.api('/me', function(info) {
+                                  login(response, info);
+                              });
+                          } else {
+                              //user cancelled login or did not grant authorization
+                              showLoader(false);
+                          }
+                      }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me' });
+                  }
+              }
+          }
+          FB.getLoginStatus(updateButton);
+          FB.Event.subscribe('auth.statusChange', updateButton);
       };
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=941854605876088';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));*/
-    var button;
-    var userInfo;
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '941854605876088', //change the appId to your appId
-            status: true,
-            cookie: true,
-            xfbml: true,
-            oauth: true
-        });
-        showLoader(true);
 
-        function updateButton(response) {
-            button = document.getElementById('fb-auth');
-            userInfo = document.getElementById('user-info');
-
-            if (response.authResponse) {
-                //user is already logged in and connected
-                FB.api('/me', function(info) {
-                    login(response, info);
-                });
-
-                button.onclick = function() {
-                    FB.logout(function(response) {
-                        logout(response);
-                    });
-                };
-            } else {
-                //user is not connected to your app or logged out
-                button.innerHTML = 'Login';
-                button.onclick = function() {
-                    showLoader(true);
-                    FB.login(function(response) {
-                        if (response.authResponse) {
-                            FB.api('/me', function(info) {
-                                login(response, info);
-                            });
-                        } else {
-                            //user cancelled login or did not grant authorization
-                            showLoader(false);
-                        }
-                    }, { scope: 'email,user_birthday,status_update,publish_stream,user_about_me' });
-                }
-            }
-        }
-
-        // run once with current status and whenever the status changes
-        FB.getLoginStatus(updateButton);
-        FB.Event.subscribe('auth.statusChange', updateButton);
-    };
-    (function() {
+      (function() {
         var e = document.createElement('script');
         e.async = true;
         e.src = document.location.protocol +
@@ -146,13 +128,11 @@
         document.getElementById('fb-root').appendChild(e);
     }());
 
-
     function login(response, info) {
         if (response.authResponse) {
             var accessToken = response.authResponse.accessToken;
 
-            userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name +
-                "<br /> Your Access Token: " + accessToken;
+            userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
             button.innerHTML = 'Logout';
             showLoader(false);
             document.getElementById('other').style.display = "block";
@@ -165,7 +145,7 @@
         document.getElementById('other').style.display = "none";
         showLoader(false);
     }
-    //stream publish method
+
     function streamPublish(name, description, hrefTitle, hrefLink, userPrompt) {
         showLoader(true);
         FB.ui({
@@ -190,7 +170,7 @@
     function showStream() {
         FB.api('/me', function(response) {
             //console.log(response.id);
-            streamPublish(response.name, 'I like the articles of Thinkdiff.net', 'hrefTitle', 'https://azurevietnam.github.io', "Share thinkdiff.net");
+            streamPublish(response.name, 'I like the articles of azurevietnam.github.io', 'hrefTitle', 'https://azurevietnam.github.io', "Share azurevietnam.github.io");
         });
     }
 
@@ -267,11 +247,13 @@
     }
 
     function showLoader(status) {
-        if (status)
+        if (status) {
             document.getElementById('loader').style.display = 'block';
-        else
+        } else {
             document.getElementById('loader').style.display = 'none';
+        }
     }
+
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
