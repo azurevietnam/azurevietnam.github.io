@@ -53,6 +53,16 @@
   window.fbAsyncInit = function() {
     testAPI();
   };
+  function testAPI() {
+    FB.api(
+    '/me', 'GET', {
+      "fields":"id, name, email"
+    },
+    function(response) {
+      document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+      console.log(response);
+    });
+  };
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;

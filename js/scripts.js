@@ -268,13 +268,4 @@ gapi.analytics.ready(function() {
     return div.innerHTML;
   }
 });
-function testAPI() {
-  FB.api(
-  '/me', 'GET', {
-    "fields":"id, name, email"
-  },
-  function(response) {
-    document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-    console.log(response);
-  });
-}
+
