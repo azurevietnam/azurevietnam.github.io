@@ -90,17 +90,17 @@ gapi.analytics.ready(function() {
         datasets : [
           {
             label: 'Last Week',
-            fillColor : 'rgba(220,220,220,0.5)',
-            strokeColor : 'rgba(220,220,220,1)',
-            pointColor : 'rgba(220,220,220,1)',
+            fillColor : '#949fb1',
+            strokeColor : '#4d5360',
+            pointColor : '#333333',
             pointStrokeColor : '#fff',
             data : data2
           },
           {
             label: 'This Week',
-            fillColor : 'rgba(151,187,205,0.5)',
-            strokeColor : 'rgba(151,187,205,1)',
-            pointColor : 'rgba(151,187,205,1)',
+            fillColor : '#d4ccc5',
+            strokeColor : '#e2eae9',
+            pointColor : '#555555',
             pointStrokeColor : '#fff',
             data : data1
           }
