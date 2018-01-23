@@ -1,151 +1,852 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Google Analytics API</title>
-    <meta name="google-site-verification" content="xoZ8pgnT3i6dJgQzfaDQ52EugxEdHxYheub5f4Kln0c" />
-    <link rel=stylesheet href="css/chartjs-visualizations.css">
-    <link rel=stylesheet href="css/styles.css">
-</head>
-
-<body>
-    <div id="loader" style="display:none">
-        <img src="images/ajax-loader.gif" alt="loading" />
-    </div>
-    <header>
-        <div id="embed-api-auth-container"></div>
-        <button id="fb-auth">Login</button>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width">
+    <title>Homepage</title>
+    <link rel="icon" href="images/icons/favicon-16x16.png" type="image/x-icon" sizes="16x16">
+    <link rel="stylesheet" href="css/libs.css">
+    <link rel="stylesheet" href="css/apps.css">
+  </head>
+  <body class="index-page">
+    <div class="overlay"></div>
+    <header class="header">
+      <div class="container">
+        <div class="header__nav">
+          <div class="menu-mobile" data-menu-mobile>
+            <div class="menu-mobile__icons" data-menu-button><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span></div>
+          </div>
+          <div class="header__logo"><img class="img-fluid" src="image/logo.png"/>
+          </div>
+          <div class="header__search">
+            <div class="form-group">
+              <input class="form-control input-keyword" type="text" placeholder="Nhập sản phẩm">
+              <button class="btn btn-round btn-submit" type="button">Tìm kiếm</button>
+            </div>
+          </div>
+          <div class="header__link" data-header-link>
+            <div class="nav-user">
+              <div class="dropdown"><i class="ui-icon icon-user"></i><span class="text dropdown-toggle" id="user-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài khoản của bạn</span>
+                <div class="user-menu dropdown-menu" aria-labelledby="user-menu">
+                  <ul>
+                    <li><a href="#" title="Đăng ký tài khoản">Đăng ký tài khoản</a>
+                    </li>
+                    <li><a href="#" title="Đăng nhập">Đăng nhập</a>
+                    </li>
+                    <li><a href="#" title="Sản phẩm yêu thích">Sản phẩm yêu thích</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="nav-wishlist"><a href="#" title="Danh sách sản phẩm yêu thích"><i class="ui-icon icon-like2"></i><span class="text">Sản phẩm yêu thích</span></a>
+            </div>
+            <div class="mini-cart">
+              <div class="dropdown drop-left"><i class="ui-icon icon-shopping-cart"></i><span class="text dropdown-toggle" id="mini-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Giỏ hàng của bạn</span>
+                <div class="mini-cart__container dropdown-menu" aria-labelledby="mini-cart"><span class="mini-cart__number">Có <strong>1</strong> sản phẩm trong giỏ hàng</span>
+                  <ul class="mini-cart__items">
+                    <li class="mini-cart__item">
+                      <div class="mini-cart__picture"><a href="#" title="Ipad Wifi 64 Gb"><img class="img-fluid" src="image/uploads/ipad.jpg"/></a>
+                      </div>
+                      <div class="mini-cart__product">
+                        <div class="mini-cart__product--title"><a href="#" title="Ipad Wifi 64 Gb">Ipad Wifi 64 Gb</a>
+                        </div>
+                        <div class="mini-cart__product--variants">
+                          <div class="mini-cart__product--color"><span class="label">Màu Sắc:</span><span class="value">Màu Vàng</span></div>
+                          <div class="mini-cart__product--size"><span class="label">Dung lượng:</span><span class="value">64 Gb</span></div>
+                        </div>
+                        <div class="mini-cart__product--quantity"><span class="label">Số Lượng:</span><span class="value">1</span></div>
+                        <div class="mini-cart__product--price"><span class="label">Đơn giá:</span><span class="value">7.790.000đ</span></div>
+                      </div>
+                    </li>
+                    <div class="mini-cart__total"><span class="label">Thành tiền</span><span class="value"><strong>7.790.000đ</strong></span></div>
+                  </ul>
+                  <div class="mini-cart__buttons">
+                    <button class="btn btn-secondary btn-round" type="button">Giỏ hàng</button>
+                    <button class="btn btn-primary btn-round" type="button">Thanh toán</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
-    <div id="fb-root">
-        <h3>Facebook Analytics Dashboard</h3>
-        <div id="status"></div>
-        <div id="user-info"></div>
+    <div class="nav__push-menu">
+      <div class="container">
+        <div class="nav-user"><a href="#" title="Tài khoản của bạn"><i class="ui-icon icon-user"></i><span class="text">Tài khoản của bạn</span></a>
+        </div>
+        <div class="nav-wishlist"><a href="#" title="Sản phẩm yêu thích"><i class="ui-icon icon-like2"></i><span class="text">Sản phẩm yêu thích</span></a>
+        </div>
+        <div class="mini-cart"><a href="#" title="Giỏ hàng của bạn"><i class="ui-icon icon-shopping-cart"></i><span class="text">Giỏ hàng của</span></a>
+        </div>
+      </div>
+      <div class="container">
+        <nav class="nav__megamenu">
+          <div class="megamenu__root">
+            <ul class="megamenu__listitem">
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Sản phẩm mới</span></a></li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">HotDeal</span></a></li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Trang điểm</span></a>
+                <ul class="megamenu__cate--sub">
+                  <li class="megamenu__cate--items"><a href="#"><span>Dành cho mặt</span></a>
+                    <ul class="megamenu__cate--subitems">
+                      <li class="megamenu__cate--item"><a href="#"><span>Phấn nước cushion</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Kem lót base/primer</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Che khuyết đIểm concealer</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Phấn phủ</span></a></li>
+                    </ul>
+                  </li>
+                  <li class="megamenu__cate--items"><a href="#"><span>Dành cho mắt</span></a>
+                    <ul class="megamenu__cate--subitems">
+                      <li class="megamenu__cate--item"><a href="#"><span>Kẻ mày</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Màu mắt</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Kẻ viền mắt</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Mascara</span></a></li>
+                    </ul>
+                  </li>
+                  <li class="megamenu__cate--items"><a href="#"><span>Dành cho môi</span></a>
+                    <ul class="megamenu__cate--subitems">
+                      <li class="megamenu__cate--item"><a href="#"><span>Son tint</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Son thỏi</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Son lì</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Dưỡng môi</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Chăm sóc da mặt</span></a>
+                <ul class="megamenu__cate--sub">
+                  <li class="megamenu__cate--items"><a href="#"><span>Tẩy trang</span></a>
+                    <ul class="megamenu__cate--subitems">
+                      <li class="megamenu__cate--item"><a href="#"><span>Sữa rửa mặt</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Tẩy da chết</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Nước hoa hồng</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Tinh chất đặc trị</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Sữa dưỡng</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Dưỡng mắt</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Mặt nạ miếng</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Kem dưỡng</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Mặt nạ ngủ</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Kem chống nắng</span></a></li>
+                    </ul>
+                  </li>
+                  <li class="megamenu__cate--items"><a href="#"><span>Giải pháp cho da</span></a>
+                    <ul class="megamenu__cate--subitems">
+                      <li class="megamenu__cate--item"><a href="#"><span>Mụn đầu đen</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Mụn đỏ - kích ứng</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Dưỡng trắng - trị thâm nám</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Chống lão hóa</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Cấp nước - phục hồi da</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Dưỡng ẩm sâu</span></a></li>
+                      <li class="megamenu__cate--item"><a href="#"><span>Chăm sóc toàn diện</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Sản phẩm thiên nhiên</span></a></li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Bộ sản phẩm làm đẹp</span></a></li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Sản phẩm khác</span></a></li>
+              <li class="megamenu__cate"><a href="#"><span class="megamenu__cate--title">Blog</span></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
-    <div class="ga-root">
-        <div id="view-selector-container"></div>
-        <div id="view-name"></div>
-        <div id="active-users-container"></div>
-        <h3>Google Analytics Dashboard</h3>
-        <div class="Chartjs">
-            <h3>So sánh tuần này và tuần trước (Thống kê bởi phiên làm việc)</h3>
-            <figure class="Chartjs-figure" id="chart-1-container"></figure>
-            <ol class="Chartjs-legend" id="legend-1-container"></ol>
+    <div class="container">
+      <div class="banner">
+        <div class="slider">
+          <ul class="list__items" data-slider data-slick="{&quot;arrows&quot;:false,&quot;slidesToShow&quot;:1,&quot;dots&quot;:true,&quot;autoplay&quot;:true,&quot;infinite&quot;:true}">
+            <li class="item"><a href="#" title="Banner 01"><img class="img-fluid" src="image/banner-01.jpg"/></a>
+            </li>
+            <li class="item"><a href="#" title="Banner 02"><img class="img-fluid" src="image/banner-02.jpg"/></a>
+            </li>
+            <li class="item"><a href="#" title="Banner 03"><img class="img-fluid" src="image/banner-03.jpg"/></a>
+            </li>
+          </ul>
         </div>
-        <div class="Chartjs">
-            <h3>So sánh năm này với năm trước (Thống kê bởi người dùng)</h3>
-            <figure class="Chartjs-figure" id="chart-2-container"></figure>
-            <ol class="Chartjs-legend" id="legend-2-container"></ol>
-        </div>
-        <div class="Chartjs">
-            <h3>Các trình duyệt truy cập (Thống kê bởi số lần xem trang)</h3>
-            <figure class="Chartjs-figure" id="chart-3-container"></figure>
-            <ol class="Chartjs-legend" id="legend-3-container"></ol>
-        </div>
-        <div class="Chartjs">
-            <h3>Các quốc gia truy cập (Thống kê bởi phiên làm việc)</h3>
-            <figure class="Chartjs-figure" id="chart-4-container"></figure>
-            <ol class="Chartjs-legend" id="legend-4-container"></ol>
-        </div>
+      </div>
     </div>
+    <nav class="nav__navbar">
+      <div class="container">
+        <div class="navbar__helper">
+          <div class="navbar__col"><a class="block-content" href="#" title="Giao hàng nhanh trong 2h"><i class="ui-icon icon-route"></i><span class="text">Giao hàng nhanh trong 2h</span></a>
+          </div>
+          <div class="navbar__col"><a class="block-content" href="#" title="Tất cả sản phẩm 100% chính hãng"><i class="ui-icon icon-box"></i><span class="text">Tất cả sản phẩm 100% chính hãng</span></a>
+          </div>
+          <div class="navbar__col"><a class="block-content" href="#" title="30 ngày đổi trả dễ dàng"><i class="ui-icon icon-time-passing"></i><span class="text">30 ngày đổi trả dễ dàng</span></a>
+          </div>
+          <div class="navbar__col"><a class="block-content" href="#" title="Ưu đãi lớn dành cho thành viên"><i class="ui-icon icon-present"></i><span class="text">Ưu đãi lớn dành cho thành viên</span></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="slider product product__slider">
+      <div class="container">
+        <h3 class="title">Sản phẩm bán chạy</h3><a class="sub-link" href="#" title="Xem thêm">Xem thêm</a>
+        <ul class="product product__grid list__items" data-slider data-slider-product data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:false,&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:3,&quot;autoplay&quot;:true,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}}]}">
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-5.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml">Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1000000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">875000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-2.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-3.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule">Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">550000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">409000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-6.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-4.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask">Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">25000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">13000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="slider product product__slider">
+      <div class="container">
+        <h3 class="title">Sản phẩm mới</h3><a class="sub-link" href="#" title="Xem thêm">Xem thêm</a>
+        <ul class="product product__grid list__items" data-slider data-slider-product data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:false,&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:3,&quot;autoplay&quot;:true,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}}]}">
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-5.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml">Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1000000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">875000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-2.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-3.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule">Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">550000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">409000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-6.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-4.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask">Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">25000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">13000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="slider product product__slider">
+      <div class="container">
+        <h3 class="title">Sản phẩm nổi bật</h3><a class="sub-link" href="#" title="Xem thêm">Xem thêm</a>
+        <ul class="product product__grid list__items" data-slider data-slider-product data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:false,&quot;infinite&quot;:false,&quot;slidesToShow&quot;:4,&quot;slidesToScroll&quot;:3,&quot;autoplay&quot;:true,&quot;responsive&quot;:[{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:1}},{&quot;breakpoint&quot;:768,&quot;settings&quot;:{&quot;slidesToShow&quot;:2,&quot;slidesToScroll&quot;:2}},{&quot;breakpoint&quot;:480,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1}}]}">
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-5.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml">Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1000000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">875000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-2.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-3.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule">Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">550000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">409000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-6.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="item">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-4.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask">Miếng dán hút mụn đầu đen, sợi bã nhờn Ciracle Black Head Cotton Mask</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">25000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">13000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="product product__grid">
+      <div class="container">
+        <div class="row small-gutter">
+          <div class="col-sm-6 col-lg-3">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-5.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml">Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1000000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">875000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-2.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-3.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule">Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">550000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">409000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-6.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">450000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product product__list">
+      <div class="container">
+        <div class="row small-gutter">
+          <div class="col-sm-12">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-5.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml">Tinh chất dưỡng trắng da cao cấp Laneige White Dew Original Ampoule Essence 40ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">1800000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                  <div class="product__item--footer-wishlist">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-like2"></i><span class="text">Yêu thích</span></button>
+                  </div>
+                  <div class="product__item--footer-compare">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-arrows-5"></i><span class="text">So sánh</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-2.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">1800000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                  <div class="product__item--footer-wishlist">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-like2"></i><span class="text">Yêu thích</span></button>
+                  </div>
+                  <div class="product__item--footer-compare">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-arrows-5"></i><span class="text">So sánh</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-3.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule">Tinh Chất Rau Má Trị Mụn, Phục Hồi Da Skin1004 Madagascar Centella Asiatica 100 Ampoule</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">1800000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                  <div class="product__item--footer-wishlist">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-like2"></i><span class="text">Yêu thích</span></button>
+                  </div>
+                  <div class="product__item--footer-compare">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-arrows-5"></i><span class="text">So sánh</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="product__item">
+              <div class="product__item--image"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml"><img class="img-fluid" data-lazy="" data-src="image/uploads/product-6.jpg" src="image/placeholder.gif"/></a>
+              </div>
+              <div class="product__item--body">
+                <h5 class="product__item--title"><a href="#" title="Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml">Kem kích trắng, mờ thâm; dưỡng ẩm sâu chiết xuất Ngọc Trai Coréana Biocos Premium White Pearl Tone Up Cream 50ml</a>
+                </h5>
+                <div class="product__item--rating" data-rating="80%"><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over star__visible"></span></span><span class="star star__under"><span class="star star__over"></span></span></div>
+                <div class="product__item--desc">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur minima ipsam rerum sit nostrum nemo</p>
+                </div>
+                <div class="product__item--prices">
+                  <div class="col product__item--priceold"><span class="text">1700000 VNĐ</span></div>
+                  <div class="col product__item--pricenew"><span class="text">1800000 VNĐ</span></div>
+                </div>
+                <div class="product__item--footer">
+                  <div class="product__item--footer-addtocard">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-shopping-cart"></i><span class="text">Đặt hàng</span></button>
+                  </div>
+                  <div class="product__item--footer-wishlist">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-like2"></i><span class="text">Yêu thích</span></button>
+                  </div>
+                  <div class="product__item--footer-compare">
+                    <button class="btn btn-animate btn-primary btn-round" type="button"><i class="icon-ui icon-arrows-5"></i><span class="text">So sánh</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer__top dark-light-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-lg-3">
+              <div class="footer__block">
+                <h4 class="title">Information</h4>
+                <ul class="list">
+                  <li><a href="#">Sitemap</a></li>
+                  <li><a href="#">Shipping & returns</a></li>
+                  <li><a href="#">Privacy notice</a></li>
+                  <li><a href="#">Conditions of Use</a></li>
+                  <li><a href="#">About us</a></li>
+                  <li><a href="#">Contact us</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="footer__block">
+                <h4 class="title">Customer service</h4>
+                <ul class="list">
+                  <li><a href="#">Search</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Recently viewed products</a></li>
+                  <li><a href="#">Compare products list</a></li>
+                  <li><a href="#">New products</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="footer__block">
+                <h4 class="title">My account</h4>
+                <ul class="list">
+                  <li><a href="#">My account</a></li>
+                  <li><a href="#">Orders</a></li>
+                  <li><a href="#">Addresses</a></li>
+                  <li><a href="#">Shopping cart</a></li>
+                  <li><a href="#">Wishlist</a></li>
+                  <li><a href="#">Apply for vendor account</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="footer__block">
+                <div class="social">
+                  <h4 class="title">Follow us</h4>
+                  <ul class="list networks">
+                    <li class="facebook"><a href="#">Facebook</a></li>
+                    <li class="twitter"><a href="#">Twitter</a></li>
+                    <li class="rss"><a href="#">RSS</a></li>
+                    <li class="youtube"><a href="#">YouTube</a></li>
+                    <li class="google-plus"><a href="#">Google+</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom gray-dark-1">
+        <div class="footer__copyright"><small>Copyright © Azurevietnam Team. All rights reserved.</small></div>
+      </div>
+    </footer>
+    <button class="btn btn-primary backtotop" type="button" data-gotop><i class="icon-ui icon-arrows-1 icon-arrows-up"></i><span class="text">Top</span></button>
+    <!-- Script Block-->
+    <script src="js/libs.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/apps.js"></script><!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112267838-1"></script>
     <script>
-      (function(w, d, s, g, js, fs) {
-          g = w.gapi || (w.gapi = {});
-          g.analytics = { q: [], ready: function(f) { this.q.push(f); } };
-          js = d.createElement(s);
-          fs = d.getElementsByTagName(s)[0];
-          js.src = 'https://apis.google.com/js/platform.js';
-          fs.parentNode.insertBefore(js, fs);
-          js.onload = function() { g.load('analytics'); };
-      }(window, document, 'script'));
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-112267838-1');
     </script>
-
-    <script>
-      var button;
-      var userInfo;
-      window.fbAsyncInit = function() {
-          FB.init({
-              appId: '941854605876088', //change the appId to your appId
-              status: true,
-              cookie: true,
-              xfbml: true,
-              oauth: true
-          });
-          showLoader(false);
-
-          function updateButton(response) {
-              button = document.getElementById('fb-auth');
-              userInfo = document.getElementById('user-info');
-
-              if (response.authResponse) {
-                  //user is already logged in and connected
-                  FB.api('/me', function(info) {
-                      login(response, info);
-                  });
-
-                  button.onclick = function() {
-                      FB.logout(function(response) {
-                          logout(response);
-                      });
-                  };
-              } else {
-                  //user is not connected to your app or logged out
-                  button.innerHTML = 'Login';
-                  button.onclick = function() {
-                      showLoader(false);
-                      FB.login(function(response) {
-                          if (response.authResponse) {
-                              FB.api('/me', function(info) {
-                                  login(response, info);
-                              });
-                          } else {
-                              //user cancelled login or did not grant authorization
-                              showLoader(false);
-                          }
-                      }, { scope: 'email,user_birthday,user_about_me' });
-                  }
-              }
-          }
-          FB.getLoginStatus(updateButton);
-          FB.Event.subscribe('auth.statusChange', updateButton);
-      };
-
-      (function() {
-          var e = document.createElement('script');
-          e.async = true;
-          e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-          document.getElementById('fb-root').appendChild(e);
-      }());
-
-      function login(response, info) {
-          if (response.authResponse) {
-              userInfo.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">' + info.name;
-              button.innerHTML = 'Logout';
-              showLoader(false);
-          }
-      }
-
-      function logout(response) {
-          userInfo.innerHTML = "";
-          document.getElementById('other').style.display = "none";
-          showLoader(false);
-      }
-
-      function showLoader(status) {
-          if (status) {
-              document.getElementById('loader').style.display = 'block';
-          } else {
-              document.getElementById('loader').style.display = 'none';
-          }
-      }
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="js/date-range-selector.js"></script>
-    <script src="js/view-selector2.js"></script>
-    <script src="js/active-users.js"></script>
-    <script src="js/scripts.js"></script>
-</body>
-
+    <noscript>JavaScript is off. Please enable to view full site.</noscript>
+  </body>
 </html>
