@@ -2126,21 +2126,6 @@
   display: block;
 }
 
-.product__list .product__item {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
-.product__list .product__item--image {
-  width: 40%;
-}
-
-.product__list .product__item--body {
-  width: 60%;
-}
-
 .product__list .product__item--footer {
   display: -ms-flexbox;
   display: flex;
@@ -2259,6 +2244,14 @@
   .product__list .product__item {
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .product__list .product__item--image {
+    width: 40%;
+  }
+  .product__list .product__item--body {
+    width: 60%;
   }
   .product__list .product__item--footer-wishlist .text {
     display: inline-block;
